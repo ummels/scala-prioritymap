@@ -1,4 +1,4 @@
-Immutable prioirty maps for Scala
+Immutable priority maps for Scala
 =================================
 
 Priority maps are similar to sorted maps, but while for sorted maps `iterator` returns an iterator that
