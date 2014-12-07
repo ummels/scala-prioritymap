@@ -1,4 +1,4 @@
-name := scala-prioritymap"
+name := "scala-prioritymap"
 
 version := "0.1-SNAPSHOT"
 
