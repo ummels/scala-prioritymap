@@ -13,3 +13,13 @@ autoAPIMappings := true
 libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.2" % "test"
 
 libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.12.0" % "test"
+
+// Configure publication of API on GitHub
+
+site.settings
+
+site.includeScaladoc("api")
+
+ghpages.settings
+
+git.remoteRepo := "git@github.com:ummels/scala-prioritymap.git"
