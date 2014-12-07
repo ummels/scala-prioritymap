@@ -18,7 +18,7 @@ libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.12.0" % "test"
 
 site.settings
 
-site.includeScaladoc("api")
+site.includeScaladoc("")
 
 ghpages.settings
 
