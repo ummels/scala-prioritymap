@@ -38,3 +38,5 @@ a submap whose values lie inside a given range.
     
     scala> m.range(1, 2)
     res5: de.ummels.prioritymap.PriorityMap[Char,Int] = PriorityMap(a -> 1)
+
+The full API docs are available [here](http://ummels.github.io/scala-prioritymap/#de.ummels.prioritymap.package).
