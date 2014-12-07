@@ -3,11 +3,11 @@ Immutable priority maps for Scala
 
 Priority maps are similar to sorted maps, but while for sorted maps `iterator` returns an iterator that
 produces entries sorted by their keys, calling `iterator` on a priority map returns an iterator that
-produces entries sorted by their ''values''. Priority maps also offer several `range` methods, which
+produces entries sorted by their *values*. Priority maps also offer several `range` methods, which
 return a submap with values inside a given range.
 
 Since calling `head` on a priority map returns a key-value pair with minimal value, priority
-maps can also be thought of as a more versatile variant of ''priority queues''.
+maps can also be thought of as a more versatile variant of *priority queues*.
 
 Usage
 -----
