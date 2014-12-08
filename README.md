@@ -9,6 +9,9 @@ return a submap with values inside a given range.
 Since calling `head` on a priority map returns a key-value pair with minimal value, priority
 maps can also be thought of as a more versatile variant of *priority queues*.
 
+This implementation of priority maps has been inspired by
+[Mark Engelberg's implentation for Clojure](https://github.com/clojure/data.priority-map).
+
 Usage
 -----
 
