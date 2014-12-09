@@ -20,7 +20,7 @@ autoAPIMappings := true
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.2" % "test"
 
-libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.12.0" % "test"
+libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.12.1" % "test"
 
 // Configure publication of API doc on GitHub
 
