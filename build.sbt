@@ -12,6 +12,8 @@ homepage := Some(url("https://github.com/ummels/scala-prioritymap"))
 
 scalaVersion := "2.11.4"
 
+crossScalaVersions := Seq("2.10.4", "2.11.4")
+
 scalacOptions ++= Seq("-Xlint", "-unchecked", "-deprecation", "-feature")
 
 autoAPIMappings := true
