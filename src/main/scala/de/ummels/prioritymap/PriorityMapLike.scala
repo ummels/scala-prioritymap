@@ -3,14 +3,20 @@ package de.ummels.prioritymap
 import collection.immutable._
 import scala.collection.GenTraversableOnce
 
-/** A template for immutable priority maps.
+/** A template trait for immutable priority maps.
   * To create a concrete priority map, you need to implement the following methods
   * in addition to those of `MapLike`:
   *
   * {{{
-  * def + (kv: (A, B): PriorityMap[A, B]
+  * def +(kv: (A, B): PriorityMap[A, B]
   * def range(from: Option[B], until: Option[B]): PriorityMap[A, B]
   * }}}
+  *
+  * The iterator returned by `iterator` should generate key/value pairs in the
+  * order specified by the implicit ordering on values.
+  *
+  * Concrete classes may also override `valueSet`, whose default implementation
+  * builds up a new SortedSet from the map's values.
   */
 trait PriorityMapLike[A, B, +This <: PriorityMapLike[A, B, This] with PriorityMap[A, B]]
   extends MapLike[A, B, This] { self =>
