@@ -12,12 +12,25 @@ maps can also be thought of as a more versatile variant of *priority queues*.
 This implementation of priority maps has been inspired by
 [Mark Engelberg's implentation for Clojure](https://github.com/clojure/data.priority-map).
 
+Setup
+-----
+
+The latest version is `0.1.0` and supports Scala 2.10 and 2.11.
+
+Releases are available from [Maven Central](http://search.maven.org/#search|ga|1|scala-prioritymap).
+If you use [sbt](http://www.scala-sbt.org/), simply add the following dependency to your build file:
+
+    libraryDependencies += "de.ummels" %% "scala-prioritymap" % "0.1.0"
+
 Usage
 -----
 
 The easiest way to instantiate a new priority map is to use the `apply` method in the
 PriorityMap companion object.
 
+    scala> import de.ummels.prioritymap.PriorityMap
+    import de.ummels.prioritymap.PriorityMap
+    
     scala> val m = PriorityMap('a' -> 1, 'b' -> 2, 'c' -> 0)
     m: de.ummels.prioritymap.PriorityMap[Char,Int] = PriorityMap(c -> 0, a -> 1, b -> 2)
 
@@ -25,21 +38,21 @@ Since priority maps are immutable, updating a key/value pair returns a new map a
 not modify the old map.
 
     scala> m + ('b' -> -1)
-    res1: de.ummels.prioritymap.PriorityMap[Char,Int] = PriorityMap(b -> -1, c -> 0, a -> 1)
+    res0: de.ummels.prioritymap.PriorityMap[Char,Int] = PriorityMap(b -> -1, c -> 0, a -> 1)
     
     scala> m
-    res2: de.ummels.prioritymap.PriorityMap[Char,Int] = PriorityMap(c -> 0, a -> 1, b -> 2)
+    res1: de.ummels.prioritymap.PriorityMap[Char,Int] = PriorityMap(c -> 0, a -> 1, b -> 2)
 
 In addition to the methods available for maps, priority maps offer methods for obtaining
 a submap whose values lie inside a given range.
 
     scala> m.from(1)
-    res3: de.ummels.prioritymap.PriorityMap[Char,Int] = PriorityMap(a -> 1, b -> 2)
+    res2: de.ummels.prioritymap.PriorityMap[Char,Int] = PriorityMap(a -> 1, b -> 2)
     
     scala> m.until(2)
-    res4: de.ummels.prioritymap.PriorityMap[Char,Int] = PriorityMap(c -> 0, a -> 1)
+    res3: de.ummels.prioritymap.PriorityMap[Char,Int] = PriorityMap(c -> 0, a -> 1)
     
     scala> m.range(1, 2)
-    res5: de.ummels.prioritymap.PriorityMap[Char,Int] = PriorityMap(a -> 1)
+    res4: de.ummels.prioritymap.PriorityMap[Char,Int] = PriorityMap(a -> 1)
 
 The full API docs are available [here](http://ummels.github.io/scala-prioritymap/#de.ummels.prioritymap.package).
