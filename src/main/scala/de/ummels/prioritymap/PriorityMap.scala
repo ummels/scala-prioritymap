@@ -55,7 +55,7 @@ object PriorityMap {
   def apply[A, B](kvs: (A, B)*)(implicit ord: Ordering[B]): PriorityMap[A, B] =
     empty[A, B] ++ kvs
 
-  /** A priority map that contains with the bindings from the given map.
+  /** A priority map that contains all bindings from the given map.
     *
     * @tparam A the key type
     * @tparam B the value type
