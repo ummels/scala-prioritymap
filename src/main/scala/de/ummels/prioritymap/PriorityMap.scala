@@ -26,11 +26,11 @@ import scala.collection.immutable._
 trait PriorityMap[A, B] extends Map[A, B] with PriorityMapLike[A, B, PriorityMap[A, B]] {
 
   /** An empty priority map of the same type as this priority map. */
-  override def empty: PriorityMap[A, B] = PriorityMap.empty
+  override def empty = PriorityMap.empty
 
   override def newBuilder = PriorityMap.newBuilder
 
-  override def stringPrefix: String = "PriorityMap"
+  override def stringPrefix = "PriorityMap"
 }
 
 /** This object provides a set of operations needed to create priority maps. */

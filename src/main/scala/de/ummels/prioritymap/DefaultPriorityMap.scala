@@ -14,15 +14,15 @@ final class DefaultPriorityMap[A, B] private (map: Map[A, B], bags: SortedMap[B,
   with PriorityMapLike[A, B, DefaultPriorityMap[A, B]]
   with Serializable {
 
-  override def empty: DefaultPriorityMap[A, B] = DefaultPriorityMap.empty
+  override def empty = DefaultPriorityMap.empty
 
   override def newBuilder = DefaultPriorityMap.newBuilder
 
-  override def size: Int = map.size
+  override def size = map.size
 
-  override def contains(key: A): Boolean = map contains key
+  override def contains(key: A) = map contains key
 
-  override def isDefinedAt(key: A): Boolean = map contains key
+  override def isDefinedAt(key: A) = map contains key
 
   override def last = {
     val greatestVal = bags.lastKey
