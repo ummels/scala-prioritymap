@@ -100,6 +100,12 @@ trait PriorityMapLike[A, B, +This <: PriorityMapLike[A, B, This] with PriorityMa
     */
   def range(from: B, until: B): This = range(Some(from), Some(until))
 
+  /** Optionally returns the first key of this priority map. */
+  def firstKey: Option[A] = headOption map (_._1)
+
+  /** Optionally returns the last key of this priority map. */
+  def lastKey: Option[A] = lastOption map (_._1)
+
   /** Optionally returns the first value of this priority map. */
   def firstValue: Option[B] = headOption map (_._2)
 
