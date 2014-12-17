@@ -14,6 +14,9 @@ final class DefaultPriorityMap[A, B] private (map: Map[A, B], bags: SortedMap[B,
   with PriorityMapLike[A, B, DefaultPriorityMap[A, B]]
   with Serializable {
 
+  def this()(implicit ordering: Ordering[B]) =
+    this(Map.empty[A, B], SortedMap.empty[B, Set[A]])
+
   override def empty = DefaultPriorityMap.empty
 
   override def newBuilder = DefaultPriorityMap.newBuilder
