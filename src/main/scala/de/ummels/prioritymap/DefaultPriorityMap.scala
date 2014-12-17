@@ -19,7 +19,7 @@ final class DefaultPriorityMap[A, B] private (map: Map[A, B], bags: SortedMap[B,
 
   override def empty = DefaultPriorityMap.empty
 
-  override def newBuilder = DefaultPriorityMap.newBuilder
+  override protected[this] def newBuilder = DefaultPriorityMap.newBuilder
 
   override def size = map.size
 

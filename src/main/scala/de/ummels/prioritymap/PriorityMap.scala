@@ -28,7 +28,7 @@ trait PriorityMap[A, B] extends Map[A, B] with PriorityMapLike[A, B, PriorityMap
   /** An empty priority map of the same type as this priority map. */
   override def empty = PriorityMap.empty
 
-  override def newBuilder = PriorityMap.newBuilder
+  override protected[this] def newBuilder = PriorityMap.newBuilder
 
   override def stringPrefix = "PriorityMap"
 }
