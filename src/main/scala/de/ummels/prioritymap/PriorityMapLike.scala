@@ -55,6 +55,26 @@ trait PriorityMapLike[A, B, +This <: PriorityMapLike[A, B, This] with PriorityMa
   def ++(kvs: GenTraversableOnce[(A, B)]): This =
     ((repr: This) /: kvs)(_ + _)
 
+
+  /** Merges a number of key/value bindings into this priority map.
+    *
+    * If a key is contained in both this map and the given bindings, computes
+    * the new value by applying the given merge function to the existing value
+    * and the new value.
+    *
+    * @param kvs a traversable object consisting of key/value pairs
+    * @param f the merge function
+    * @return a new priority map with the new bindings merged into this map
+    */
+  def merged(kvs: GenTraversableOnce[(A, B)])(f: (B, B) => B): This =
+    ((repr: This) /: kvs) { (m, kv) =>
+      val (k, v2) = kv
+      m.get(k) match {
+        case None => m + kv
+        case Some(v1) => m + (k -> f(v1, v2))
+      }
+    }
+
   override def filterKeys(p: A => Boolean): PriorityMap[A, B] =
     new FilteredKeys(p) with PriorityMap.Default[A, B] {
       implicit def ordering: Ordering[B] = self.ordering
