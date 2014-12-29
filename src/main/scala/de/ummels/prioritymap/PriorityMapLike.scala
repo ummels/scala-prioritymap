@@ -53,7 +53,7 @@ trait PriorityMapLike[A, B, +This <: PriorityMapLike[A, B, This] with PriorityMa
     * @return a new priority map with the new bindings added to this map
     */
   def ++(kvs: GenTraversableOnce[(A, B)]): PriorityMap[A, B] =
-    ((repr: PriorityMap[A, B]) /: kvs.seq)(_ + _)
+    ((repr: PriorityMap[A, B]) /: kvs)(_ + _)
 
   override def filterKeys(p: A => Boolean): PriorityMap[A, B] =
     new FilteredKeys(p) with PriorityMap.Default[A, B] {
