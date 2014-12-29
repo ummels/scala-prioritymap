@@ -1,7 +1,7 @@
 package de.ummels.prioritymap
 
 import org.scalacheck.{Arbitrary, Gen}
-import org.scalatest.{PropSpec, Matchers, prop}
+import org.scalatest.{Matchers, PropSpec, prop}
 
 /** Spec for immutable priority maps */
 class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
@@ -97,6 +97,21 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
   property("updated should behave like +") {
     forAll { (m: PriorityMap[Keys, Values], key: Keys, value: Values) =>
       m updated (key, value) shouldBe m + (key -> value)
+    }
+  }
+
+  property("merged should merge old and new values") {
+    forAll (for {
+      m <- Arbitrary.arbitrary[PriorityMap[Keys, Values]]
+      keys <- Gen.listOfN(m.size, Arbitrary.arbitrary[Keys])
+      vals <- Gen.listOfN(m.size, Arbitrary.arbitrary[Values])
+    } yield (m, keys, vals)) { case (m, keys, vals) =>
+      val f: (Values, Values) => Values = (v1, v2) => (v1._1 + v2._1, v1._2 min v2._2)
+      val kvs = keys zip vals
+      val m1 = (m merged kvs)(f)
+      val all = m.toSeq ++ kvs
+      val m2 = all groupBy (_._1) mapValues (xs => xs map (_._2) reduceLeft f)
+      m1 shouldBe m2
     }
   }
 
