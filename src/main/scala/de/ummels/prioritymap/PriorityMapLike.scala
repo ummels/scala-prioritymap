@@ -22,20 +22,22 @@ trait PriorityMapLike[A, B, +This <: PriorityMapLike[A, B, This] with PriorityMa
   extends MapLike[A, B, This] { self =>
   implicit def ordering: Ordering[B]
 
-  /** Add a key/value binding to this priority map.
+  /** Adds a key/value binding to this priority map.
+    *
     * @param kv the key/value pair
     * @return a new priority map with the new binding added to this priority map
     */
   def +(kv: (A, B)): PriorityMap[A, B]
 
   /** Add a key/value binding to this priority map.
+    *
     * @param key the key
     * @param value the value
     * @return a new priority map with the new binding added to this map
     */
   def updated(key: A, value: B): PriorityMap[A, B] = this + (key -> value)
 
-  /** Add two or more key/value bindings to this priority map.
+  /** Adds two or more key/value bindings to this priority map.
     *
     * @param kv1 the first key/value pair to add
     * @param kv2 the second key/value pair to add
@@ -45,7 +47,7 @@ trait PriorityMapLike[A, B, +This <: PriorityMapLike[A, B, This] with PriorityMa
   def +(kv1: (A, B), kv2: (A, B), kvs: (A, B)*): PriorityMap[A, B] =
     this + kv1 + kv2 ++ kvs
 
-  /** Add a number of key/value bindings to this priority map.
+  /** Adds a number of key/value bindings to this priority map.
     *
     * @param kvs a traversable object consisting of key/value pairs
     * @return a new priority map with the new bindings added to this map
@@ -61,8 +63,9 @@ trait PriorityMapLike[A, B, +This <: PriorityMapLike[A, B, This] with PriorityMa
     }
 
   /** Transforms this map by applying a function to every retrieved value.
+    *
     *  @param  f the function used to transform values of this map
-    *  @return a new priority map view which maps every key of this map
+    *  @return a new priority map that maps every key of this map
     *          to `f(this(key))`
     */
   def mapValues[C](f: B => C)(implicit ord: Ordering[C]): PriorityMap[A, C] =
@@ -79,14 +82,14 @@ trait PriorityMapLike[A, B, +This <: PriorityMapLike[A, B, This] with PriorityMa
   def range(from: Option[B], until: Option[B]): This
 
   /** Returns a new priority map of the same type as this priority map that
-    * only contains values greater than or equal to the given lower bound
+    * only contains values greater than or equal to the given lower bound.
     *
     *  @param from the lower-bound (inclusive) on values
     */
   def from(from: B): This = range(Some(from), None)
 
   /** Returns a new priority map of the same type as this priority map that
-    * only contains values smaller than given upper bound
+    * only contains values smaller than given upper bound.
     *
     *  @param until the upper-bound (exclusive) on values
     */
