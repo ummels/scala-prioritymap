@@ -1,8 +1,8 @@
 package de.ummels.prioritymap
 
 import scala.collection.generic.CanBuildFrom
-import scala.collection.{mutable, GenTraversableOnce}
 import scala.collection.immutable._
+import scala.collection.mutable
 
 /** A generic trait for immutable priority maps. Concrete classes have to provide
   * functionality for the abstract methods in `PriorityMap`:
@@ -36,7 +36,7 @@ trait PriorityMap[A, B] extends Map[A, B] with PriorityMapLike[A, B, PriorityMap
 /** This object provides a set of operations needed to create priority maps. */
 object PriorityMap {
 
-  import language.implicitConversions
+  import scala.language.implicitConversions
 
   type Coll = PriorityMap[_, _]
 

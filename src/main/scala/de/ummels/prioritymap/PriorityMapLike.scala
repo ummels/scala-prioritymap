@@ -1,7 +1,7 @@
 package de.ummels.prioritymap
 
-import collection.immutable._
 import scala.collection.GenTraversableOnce
+import scala.collection.immutable._
 
 /** A template trait for immutable priority maps.
   * To create a concrete priority map, you need to implement the following methods
