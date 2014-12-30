@@ -17,6 +17,19 @@ final class DefaultPriorityMap[A, B] private (map: Map[A, B], bags: SortedMap[B,
   def this()(implicit ordering: Ordering[B]) =
     this(Map.empty[A, B], SortedMap.empty[B, Set[A]])
 
+  private def insert(key: A, value: B): DefaultPriorityMap[A, B] = {
+    //require(!map.contains(key))
+    val bags1 = bags + (value -> (bags.getOrElse(value, Set.empty) + key))
+    new DefaultPriorityMap(map.updated(key, value), bags1)
+  }
+
+  private def delete(key: A, value: B): DefaultPriorityMap[A, B] = {
+    //require(map(key) == value)
+    val bag = bags(value) - key
+    val bags1 = if (bag.isEmpty) bags - value else bags updated(value, bag)
+    new DefaultPriorityMap(map - key, bags1)
+  }
+
   override def empty = DefaultPriorityMap.empty
 
   override protected[this] def newBuilder = DefaultPriorityMap.newBuilder
@@ -46,24 +59,24 @@ final class DefaultPriorityMap[A, B] private (map: Map[A, B], bags: SortedMap[B,
 
   override def tail = headOption match {
     case None => throw new UnsupportedOperationException("tail of empty map")
-    case Some((k, _)) => this - k
+    case Some((k, v)) => delete(k, v)
   }
 
   override def init = lastOption match {
     case None => throw new UnsupportedOperationException("init of empty map")
-    case Some((k, _)) => this - k
+    case Some((k, v)) => delete(k, v)
   }
 
   override def drop(n: Int) = {
     if (n <= 0) this
     else if (n >= size) empty
-    else this -- keys.take(n)
+    else (this /: iterator.take(n))((m, kv) => kv match { case (k, v) => m.delete(k, v) })
   }
 
   override def take(n: Int) = {
     if (n <= 0) empty
     else if (n >= size) this
-    else empty ++ super.take(n)
+    else empty ++ iterator.take(n)
   }
 
   override def slice(from: Int, until: Int) = {
@@ -92,18 +105,12 @@ final class DefaultPriorityMap[A, B] private (map: Map[A, B], bags: SortedMap[B,
 
   override def span(p: ((A, B)) => Boolean) = splitAt(countWhile(p))
 
-  private def insert(key: A, value: B): DefaultPriorityMap[A, B] = {
-    require(!map.contains(key))
-    val bags1 = bags + (value -> (bags.getOrElse(value, Set.empty) + key))
-    new DefaultPriorityMap(map updated(key, value), bags1)
-  }
-
   def +(kv: (A, B)): DefaultPriorityMap[A, B] = {
-    val (k, v) = kv
-    get(k) match {
-      case None => insert(k, v)
-      case Some(`v`) => this
-      case Some(_) => (this - k).insert(k, v)
+    val (key, value) = kv
+    get(key) match {
+      case None => insert(key, value)
+      case Some(`value`) => this
+      case Some(v) => delete(key, v).insert(key, value)
     }
   }
 
@@ -113,7 +120,7 @@ final class DefaultPriorityMap[A, B] private (map: Map[A, B], bags: SortedMap[B,
     this + kv1 + kv2 ++ kvs
 
   override def ++(kvs: GenTraversableOnce[(A, B)]): DefaultPriorityMap[A, B] =
-    (this /: kvs.seq)(_ + _)
+    (this /: kvs)(_ + _)
 
   def +[B1 >: B](kv: (A, B1)): Map[A, B1] = map + kv
 
@@ -126,10 +133,7 @@ final class DefaultPriorityMap[A, B] private (map: Map[A, B], bags: SortedMap[B,
 
   def -(key: A): DefaultPriorityMap[A, B] = get(key) match {
     case None => this
-    case Some(v) =>
-      val bag = bags(v) - key
-      val bags1 = if (bag.isEmpty) bags - v else bags updated(v, bag)
-      new DefaultPriorityMap(map - key, bags1)
+    case Some(v) => delete(key, v)
   }
 }
 
