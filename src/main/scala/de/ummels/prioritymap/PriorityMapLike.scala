@@ -27,7 +27,7 @@ trait PriorityMapLike[A, B, +This <: PriorityMapLike[A, B, This] with PriorityMa
     * @param kv the key/value pair
     * @return a new priority map with the new binding added to this priority map
     */
-  def +(kv: (A, B)): PriorityMap[A, B]
+  def +(kv: (A, B)): This
 
   /** Add a key/value binding to this priority map.
     *
@@ -35,7 +35,7 @@ trait PriorityMapLike[A, B, +This <: PriorityMapLike[A, B, This] with PriorityMa
     * @param value the value
     * @return a new priority map with the new binding added to this map
     */
-  def updated(key: A, value: B): PriorityMap[A, B] = this + (key -> value)
+  def updated(key: A, value: B): This = this + (key -> value)
 
   /** Adds two or more key/value bindings to this priority map.
     *
@@ -44,7 +44,7 @@ trait PriorityMapLike[A, B, +This <: PriorityMapLike[A, B, This] with PriorityMa
     * @param kvs the remaining key/value pairs to add
     * @return a new priority map with the new bindings added to this map
     */
-  def +(kv1: (A, B), kv2: (A, B), kvs: (A, B)*): PriorityMap[A, B] =
+  def +(kv1: (A, B), kv2: (A, B), kvs: (A, B)*): This =
     this + kv1 + kv2 ++ kvs
 
   /** Adds a number of key/value bindings to this priority map.
@@ -52,8 +52,8 @@ trait PriorityMapLike[A, B, +This <: PriorityMapLike[A, B, This] with PriorityMa
     * @param kvs a traversable object consisting of key/value pairs
     * @return a new priority map with the new bindings added to this map
     */
-  def ++(kvs: GenTraversableOnce[(A, B)]): PriorityMap[A, B] =
-    ((repr: PriorityMap[A, B]) /: kvs)(_ + _)
+  def ++(kvs: GenTraversableOnce[(A, B)]): This =
+    ((repr: This) /: kvs)(_ + _)
 
   override def filterKeys(p: A => Boolean): PriorityMap[A, B] =
     new FilteredKeys(p) with PriorityMap.Default[A, B] {

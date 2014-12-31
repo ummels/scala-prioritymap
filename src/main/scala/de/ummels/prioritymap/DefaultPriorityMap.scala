@@ -31,6 +31,29 @@ final class DefaultPriorityMap[A, B] private (map: Map[A, B], bags: SortedMap[B,
     new DefaultPriorityMap(map - key, bags1)
   }
 
+  def +(kv: (A, B)): DefaultPriorityMap[A, B] = {
+    val (key, value) = kv
+    get(key) match {
+      case None => insert(key, value)
+      case Some(`value`) => this
+      case Some(v) => delete(key, v).insert(key, value)
+    }
+  }
+
+  def +[B1 >: B](kv: (A, B1)): Map[A, B1] = map + kv
+
+  def get(key: A): Option[B] = map get key
+
+  def iterator: Iterator[(A, B)] = for {
+    (b, bag) <- bags.iterator
+    a <- bag.iterator
+  } yield (a, b)
+
+  def -(key: A): DefaultPriorityMap[A, B] = get(key) match {
+    case None => this
+    case Some(v) => delete(key, v)
+  }
+
   override def empty = DefaultPriorityMap.empty
 
   override protected[this] def newBuilder = DefaultPriorityMap.newBuilder
@@ -105,37 +128,6 @@ final class DefaultPriorityMap[A, B] private (map: Map[A, B], bags: SortedMap[B,
   override def takeWhile(p: ((A, B)) => Boolean) = take(countWhile(p))
 
   override def span(p: ((A, B)) => Boolean) = splitAt(countWhile(p))
-
-  def +(kv: (A, B)): DefaultPriorityMap[A, B] = {
-    val (key, value) = kv
-    get(key) match {
-      case None => insert(key, value)
-      case Some(`value`) => this
-      case Some(v) => delete(key, v).insert(key, value)
-    }
-  }
-
-  override def updated(key: A, value: B): DefaultPriorityMap[A, B] = this + (key -> value)
-
-  override def +(kv1: (A, B), kv2: (A, B), kvs: (A, B)*): DefaultPriorityMap[A, B] =
-    this + kv1 + kv2 ++ kvs
-
-  override def ++(kvs: GenTraversableOnce[(A, B)]): DefaultPriorityMap[A, B] =
-    (this /: kvs)(_ + _)
-
-  def +[B1 >: B](kv: (A, B1)): Map[A, B1] = map + kv
-
-  def get(key: A): Option[B] = map get key
-
-  def iterator: Iterator[(A, B)] = for {
-    (b, bag) <- bags.iterator
-    a <- bag.iterator
-  } yield (a, b)
-
-  def -(key: A): DefaultPriorityMap[A, B] = get(key) match {
-    case None => this
-    case Some(v) => delete(key, v)
-  }
 
   override def par: ParMap[A, B] = map.par
 }
