@@ -49,36 +49,6 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
     }
   }
 
-  property("slice should respect order") {
-    forAll (for {
-      m <- Arbitrary.arbitrary[PriorityMap[Keys, Values]]
-      i <- Gen.choose(0, m.size)
-    } yield (m, i)) { case (m, i) =>
-      m.slice(0, i).toSeq ++ m.slice(i, m.size).toSeq shouldBe m.toSeq
-    }
-  }
-
-  property("splitAt should respect order") {
-    forAll (for {
-      m <- Arbitrary.arbitrary[PriorityMap[Keys, Values]]
-      i <- Gen.choose(0, m.size)
-    } yield (m, i)) { case (m, i) =>
-      val (m1, m2) = m.splitAt(i)
-      m1.toSeq ++ m2.toSeq shouldBe m.toSeq
-    }
-  }
-
-  property("span should respect order") {
-    forAll (for {
-      m <- Arbitrary.arbitrary[PriorityMap[Keys, Values]]
-      i <- Gen.choose(0, m.size)
-      p <- Gen.containerOfN[Set, (Keys, Values)](i, Gen.oneOf(m.toSeq))
-    } yield (m, p)) { case (m, p) =>
-      val (m1, m2) = m.span(p)
-      m1.toSeq ++ m2.toSeq shouldBe m.toSeq
-    }
-  }
-
   property("+ and ++ should add and replace elements") {
     forAll (for {
       m <- Arbitrary.arbitrary[PriorityMap[Keys, Values]]

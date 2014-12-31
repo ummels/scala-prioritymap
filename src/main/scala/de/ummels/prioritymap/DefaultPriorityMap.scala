@@ -91,44 +91,6 @@ final class DefaultPriorityMap[A, B] private (map: Map[A, B], bags: SortedMap[B,
     case Some((k, v)) => delete(k, v)
   }
 
-  override def drop(n: Int) = {
-    if (n <= 0) this
-    else if (n >= size) empty
-    else (this /: iterator.take(n))((m, kv) => kv match { case (k, v) => m.delete(k, v) })
-  }
-
-  override def take(n: Int) = {
-    if (n <= 0) empty
-    else if (n >= size) this
-    else empty ++ iterator.take(n)
-  }
-
-  override def slice(from: Int, until: Int) = {
-    if (until <= from) empty
-    else if (from <= 0) take(until)
-    else if (until >= size) drop(from)
-    else drop(from).take(until - from)
-  }
-
-  override def dropRight(n: Int) = take(size - n)
-
-  override def takeRight(n: Int) = drop(size - n)
-
-  override def splitAt(n: Int) = (take(n), drop(n))
-
-  private[this] def countWhile(p: ((A, B)) => Boolean): Int = {
-    var result = 0
-    val it = iterator
-    while (it.hasNext && p(it.next())) result += 1
-    result
-  }
-
-  override def dropWhile(p: ((A, B)) => Boolean) = drop(countWhile(p))
-
-  override def takeWhile(p: ((A, B)) => Boolean) = take(countWhile(p))
-
-  override def span(p: ((A, B)) => Boolean) = splitAt(countWhile(p))
-
   override def par: ParMap[A, B] = map.par
 }
 
