@@ -1,5 +1,6 @@
 package de.ummels.prioritymap
 
+import scala.collection.parallel.immutable.ParMap
 import scala.collection.{mutable, GenTraversableOnce}
 import scala.collection.generic.CanBuildFrom
 import scala.collection.immutable._
@@ -135,6 +136,8 @@ final class DefaultPriorityMap[A, B] private (map: Map[A, B], bags: SortedMap[B,
     case None => this
     case Some(v) => delete(key, v)
   }
+
+  override def par: ParMap[A, B] = map.par
 }
 
 /** This object provides a set of operations needed to create priority maps. */
