@@ -134,23 +134,27 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
     }
   }
 
-  property("firstValue should return the minimal value") {
+  property("firstKey should optionally return the first key") {
     forAll { (m: PriorityMap[Keys, Values]) =>
-      if (m.isEmpty)
-        m.firstValue shouldBe None
-      else {
-        m.values.min shouldBe m.firstValue.get
-      }
+      m.firstKey shouldBe m.keys.headOption
     }
   }
 
-  property("lastValue should return the maximal value") {
+  property("lastKey should optionally return the last key") {
     forAll { (m: PriorityMap[Keys, Values]) =>
-      if (m.isEmpty)
-        m.lastValue shouldBe None
-      else {
-        m.values.max shouldBe m.lastValue.get
-      }
+      m.lastKey shouldBe m.keys.lastOption
+    }
+  }
+
+  property("firstValue should optionally return the first value") {
+    forAll { (m: PriorityMap[Keys, Values]) =>
+      m.firstValue shouldBe m.values.headOption
+    }
+  }
+
+  property("lastValue should optionally return the last value") {
+    forAll { (m: PriorityMap[Keys, Values]) =>
+      m.lastValue shouldBe m.values.lastOption
     }
   }
 
