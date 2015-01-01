@@ -14,14 +14,6 @@ publishTo := {
     Some("releases" at nexus + "service/local/staging/deploy/maven2")
 }
 
-credentials ++= (for {
-  password <- sys.env.get("SONATYPE_PASSWORD").toSeq
-} yield
-  Credentials("Sonatype Nexus Repository Manager",
-    "oss.sonatype.org",
-    "ummels",
-    password))
-
 publishMavenStyle := true
 
 publishArtifact in Test := false
