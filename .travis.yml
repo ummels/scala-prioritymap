@@ -11,7 +11,7 @@ env:
   global:
   - secure: hIpvEAD74pFwnmVMMPFWgdSpw9bQ941602xdlx1GHflbOG3ZvT0a2w3jQgrxpv8qgk5LzMo++la0E+CmYllFvKd3asNMh9CDkw9juEXufdRDyQRPH3gdorKxDKuw7Ewu83KNEFSWvh+owMSu8kYnXgigHRzOJ/LvmMUoamRgRns=
 after_success:
-- echo $GPG_PASSWORD | gpg sonatype.sbt.gpg
-- echo $GPG_PASSWORD | gpg secring.asc.gpg
-- echo $GPG_PASSWORD | gpg pubring.asc.gpg
+- echo $GPG_PASSWORD | gpg --passphrase-fd 0 sonatype.sbt.gpg
+- echo $GPG_PASSWORD | gpg --passphrase-fd 0 secring.asc.gpg
+- echo $GPG_PASSWORD | gpg --passphrase-fd 0 pubring.asc.gpg
 - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && test $TRAVIS_JDK_VERSION = "oraclejdk8" && sbt ++$TRAVIS_SCALA_VERSION publishSigned
