@@ -11,12 +11,13 @@ publishTo := {
   if (isSnapshot.value)
     Some("snapshots" at nexus + "content/repositories/snapshots")
   else
-    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+    Some("releases" at nexus + "service/local/staging/deploy/maven2")
 }
 
 credentials ++= (for {
-  password <- Option(System.getenv().get("SONATYPE_PASSWORD")).toSeq
-} yield Credentials("Sonatype Nexus Repository Manager",
+  password <- sys.env.get("SONATYPE_PASSWORD").toSeq
+} yield
+  Credentials("Sonatype Nexus Repository Manager",
     "oss.sonatype.org",
     "ummels",
     password))
