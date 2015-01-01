@@ -13,5 +13,4 @@ env:
 after_success:
 - echo $GPG_PASSWORD | gpg --passphrase-fd 0 sonatype.sbt.gpg
 - echo $GPG_PASSWORD | gpg --passphrase-fd 0 secring.asc.gpg
-- echo $GPG_PASSWORD | gpg --passphrase-fd 0 pubring.asc.gpg
 - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && test $TRAVIS_JDK_VERSION = "oraclejdk8" && sbt ++$TRAVIS_SCALA_VERSION publishSigned
