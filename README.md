@@ -1,7 +1,7 @@
 Immutable priority maps for Scala
 =================================
 
-[![Build Status](https://travis-ci.org/ummels/scala-prioritymap.png?branch=master)](https://travis-ci.org/ummels/scala-prioritymap)
+[![Build Status](https://travis-ci.org/ummels/scala-prioritymap.svg?branch=master)](https://travis-ci.org/ummels/scala-prioritymap)
 
 Priority maps are similar to sorted maps, but while for sorted maps `iterator` returns an iterator that
 produces entries sorted by their keys, calling `iterator` on a priority map returns an iterator that
