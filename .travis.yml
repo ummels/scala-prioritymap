@@ -7,3 +7,12 @@ jdk:
   - oraclejdk8
   - oraclejdk7
   - openjdk7
+env:
+  global:
+    secure: Vxik6xgcMXkMy+rvTV4iMsZ+jFWKA/XeWs3KSpR+vMKf+I9dCXYlKElhpK6FQw1DJbmm9etN528USmBsnwWkf0wyJI0/BsDpV0Xmdq+zbT3rlB5agi7gTiYfQ+AiDPZjg8M27Z8yaQpy8q5J4nT4XkXzpMkmCMDhhX6vLEJ994k=
+after_success:
+  - >
+      test $TRAVIS_PULL_REQUEST == "false" &&
+      test $TRAVIS_BRANCH == "master" &&
+      test $TRAVIS_JDK_VERSION = "oraclejdk8" &&
+      sbt ++$TRAVIS_SCALA_VERSION publish
