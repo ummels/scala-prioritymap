@@ -8,8 +8,8 @@ import scala.collection.immutable._
   * in addition to those of `MapLike`:
   *
   * {{{
-  * def +(kv: (A, B): PriorityMap[A, B]
-  * def range(from: Option[B], until: Option[B]): PriorityMap[A, B]
+  * def +(kv: (A, B): This
+  * def rangeImpl(from: Option[B], until: Option[B]): This
   * }}}
   *
   * The iterator returned by `iterator` should generate key/value pairs in the
@@ -79,7 +79,8 @@ trait PriorityMapLike[A, B, +This <: PriorityMapLike[A, B, This] with PriorityMa
     new FilteredKeys(p) with PriorityMap.Default[A, B] {
       implicit def ordering: Ordering[B] = self.ordering
 
-      def range(from: Option[B], until: Option[B]) = self.range(from, until).filterKeys(p)
+      def rangeImpl(from: Option[B], until: Option[B]) =
+        self.rangeImpl(from, until).filterKeys(p)
     }
 
   /** Transforms this map by applying a function to every retrieved value.
@@ -99,21 +100,21 @@ trait PriorityMapLike[A, B, +This <: PriorityMapLike[A, B, This] with PriorityMa
     *  @param until the upper-bound (exclusive) on values or
     *               `None` if there is no upper bound
     */
-  def range(from: Option[B], until: Option[B]): This
+  def rangeImpl(from: Option[B], until: Option[B]): This
 
   /** Returns a new priority map of the same type as this priority map that
     * only contains values greater than or equal to the given lower bound.
     *
     *  @param from the lower-bound (inclusive) on values
     */
-  def from(from: B): This = range(Some(from), None)
+  def from(from: B): This = rangeImpl(Some(from), None)
 
   /** Returns a new priority map of the same type as this priority map that
     * only contains values smaller than given upper bound.
     *
     *  @param until the upper-bound (exclusive) on values
     */
-  def until(until: B): This = range(None, Some(until))
+  def until(until: B): This = rangeImpl(None, Some(until))
 
   /** Returns a new priority map of the same type as this priority map that
     * only contains values between the given bounds.
@@ -121,7 +122,7 @@ trait PriorityMapLike[A, B, +This <: PriorityMapLike[A, B, This] with PriorityMa
     *  @param from  the lower-bound (inclusive) on values
     *  @param until the upper-bound (exclusive) on values
     */
-  def range(from: B, until: B): This = range(Some(from), Some(until))
+  def range(from: B, until: B): This = rangeImpl(Some(from), Some(until))
 
   /** Optionally returns the first key of this priority map. */
   def firstKey: Option[A] = headOption map (_._1)

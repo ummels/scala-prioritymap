@@ -75,7 +75,7 @@ final class DefaultPriorityMap[A, B] private (map: Map[A, B], bags: SortedMap[B,
 
   override def valueSet = bags.keySet
 
-  def range(from: Option[B], until: Option[B]): DefaultPriorityMap[A, B]  = {
+  def rangeImpl(from: Option[B], until: Option[B]): DefaultPriorityMap[A, B]  = {
     val bags1 = bags.rangeImpl(from, until)
     val map1 = map.filterKeys(k => (map.get(k) map bags1.contains) getOrElse true)
     new DefaultPriorityMap[A, B](map1, bags1)

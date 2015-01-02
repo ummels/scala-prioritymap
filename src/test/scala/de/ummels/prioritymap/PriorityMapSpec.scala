@@ -154,7 +154,7 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
       def isInRange(v: Values): Boolean =
         from.map(f => m.ordering.lteq(f, v)).getOrElse(true) &&
           until.map(u => m.ordering.lt(v, u)).getOrElse(true)
-      m.range(from, until) shouldBe m.filter { case (_, v) => isInRange(v) }
+      m.rangeImpl(from, until) shouldBe m.filter { case (_, v) => isInRange(v) }
     }
   }
 }

@@ -13,7 +13,7 @@ import scala.collection.mutable
   * def +(kv: (A, B): PriorityMap[A, B]
   * def +[B1 >: B](kv: (A, B1)): Map[A, B1]
   * def -(key: A): PriorityMap[A, B]
-  * def range(from: Option[B], until: Option[B]): PriorityMap[A, B]
+  * def rangeImpl(from: Option[B], until: Option[B]): PriorityMap[A, B]
   * implicit def ordering: Ordering[B]
   * }}}
   *
