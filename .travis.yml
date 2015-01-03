@@ -7,14 +7,15 @@ jdk:
 - oraclejdk8
 - oraclejdk7
 - openjdk7
-env:
-  global:
-  - secure: hIpvEAD74pFwnmVMMPFWgdSpw9bQ941602xdlx1GHflbOG3ZvT0a2w3jQgrxpv8qgk5LzMo++la0E+CmYllFvKd3asNMh9CDkw9juEXufdRDyQRPH3gdorKxDKuw7Ewu83KNEFSWvh+owMSu8kYnXgigHRzOJ/LvmMUoamRgRns=
 after_success:
 - |
   test $TRAVIS_PULL_REQUEST == "false" &&
   test $TRAVIS_BRANCH == "master" &&
   test $TRAVIS_JDK_VERSION = "oraclejdk8" &&
-  echo $GPG_PASSWORD | gpg --passphrase-fd 0 sonatype.sbt.gpg &&
-  echo $GPG_PASSWORD | gpg --passphrase-fd 0 secring.asc.gpg &&
+  echo $AES_PASSWORD | gpg --passphrase-fd 0 sonatype.sbt.gpg &&
+  echo $AES_PASSWORD | gpg --passphrase-fd 0 secring.gpg.gpg &&
   sbt ++$TRAVIS_SCALA_VERSION publishSigned
+env:
+  global:
+  - secure: dTvLAxFtu9mYVPT+r+EYBDaQ3z3l6FfqRVn5LqoWUBIJhqV3N/bODHM1GYiyjTN7E4Ki8Wji1c9riKJ9tKvXUvfe0aIOtC8jzUGThQuXJnLIsyjXYLZTiHrO1VuNOo+hsgN6vrFcKm5gUXaIrxSgmNp3N5OOL1F/+MK4TLIPlII=
+  - secure: mDTbz/VSvbIlnlVVUSMDSeoOWH6DEJ84nVdIRULNJLDdevlLV+YXmxQ7xTzSzAlPAyaJ3zXpLYGEJMT4LEvSg1wy+kara4/LPZ6T1PHC/0XX+7egjCrzsTuppfatQ2tXviK6Nx8+fhN5PcCsrVyFCc66TOzh+cDKFcADhLWKWr8=
