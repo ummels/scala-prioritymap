@@ -12,10 +12,10 @@ after_success:
   test $TRAVIS_PULL_REQUEST == "false" &&
   test $TRAVIS_BRANCH == "master" &&
   test $TRAVIS_JDK_VERSION = "oraclejdk8" &&
-  echo $AES_PASSWORD | gpg --passphrase-fd 0 sonatype.sbt.gpg &&
   echo $AES_PASSWORD | gpg --passphrase-fd 0 secring.gpg.gpg &&
-  sbt ++$TRAVIS_SCALA_VERSION publishSigned
+  sbt ++$TRAVIS_SCALA_VERSION travis:publishSigned
 env:
   global:
   - secure: dTvLAxFtu9mYVPT+r+EYBDaQ3z3l6FfqRVn5LqoWUBIJhqV3N/bODHM1GYiyjTN7E4Ki8Wji1c9riKJ9tKvXUvfe0aIOtC8jzUGThQuXJnLIsyjXYLZTiHrO1VuNOo+hsgN6vrFcKm5gUXaIrxSgmNp3N5OOL1F/+MK4TLIPlII=
   - secure: mDTbz/VSvbIlnlVVUSMDSeoOWH6DEJ84nVdIRULNJLDdevlLV+YXmxQ7xTzSzAlPAyaJ3zXpLYGEJMT4LEvSg1wy+kara4/LPZ6T1PHC/0XX+7egjCrzsTuppfatQ2tXviK6Nx8+fhN5PcCsrVyFCc66TOzh+cDKFcADhLWKWr8=
+  - secure: eg/nDoGryerr4xT37aojC5M7YsOnWg0nct/8BJZcF4hd2aJh1kqqYEkwOKMHdVnGGdKy0dHK+mwSrefORcJBAzbV3yluQUgDDmFUVHqjsWhSzu12rBtMhmkaqNRvcznd/hHy509k6+RiQ7iFipE9idpEy3axUTTaWsMJPMLdzFg=
