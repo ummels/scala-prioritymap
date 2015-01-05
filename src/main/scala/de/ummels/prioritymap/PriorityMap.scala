@@ -79,11 +79,11 @@ object PriorityMap {
       def apply() = newBuilder[A, B]
     }
 
-  private[prioritymap] trait Default[A, B] extends DefaultMap[A, B] with PriorityMap[A, B] {
+  private[prioritymap] trait View[A, B] extends DefaultMap[A, B] with PriorityMap[A, B] {
     override def +(kv: (A, B)): PriorityMap[A, B] = {
       val b = newBuilder
       b ++= this
-      b += ((kv._1, kv._2))
+      b += kv
       b.result()
     }
 
