@@ -25,10 +25,32 @@ import scala.collection.mutable
   */
 trait PriorityMap[A, B] extends Map[A, B] with PriorityMapLike[A, B, PriorityMap[A, B]] {
 
+  import PriorityMap._
+
   /** An empty priority map of the same type as this priority map. */
   override def empty = PriorityMap.empty
 
   override def seq: PriorityMap[A, B] = this
+
+  /** The same priority map with a given default function.
+    * Note: `get`, `contains`, `iterator`, `keys`, etc. are not affected by `withDefault`.
+    *
+    * Invoking transformer methods (e.g. `map`) will not preserve the default value.
+    *
+    * @param d the function mapping keys to values, used for non-present keys
+    * @return  a wrapper of this priority map with a default function
+    */
+  def withDefault(d: A => B): PriorityMap[A, B] = new WithDefault(this, d)
+
+  /** The same priority map with a given default value.
+    * Note: `get`, `contains`, `iterator`, `keys`, etc. are not affected by `withDefaultValue`.
+    *
+    * Invoking transformer methods (e.g. `map`) will not preserve the default value.
+    *
+    * @param d default value used for non-present keys
+    * @return  a wrapper of this priority map with a default value
+    */
+  def withDefaultValue(d: B): PriorityMap[A, B] = new WithDefault(this, x => d)
 
   override protected[this] def newBuilder = PriorityMap.newBuilder
 
@@ -93,4 +115,24 @@ object PriorityMap {
       b.result()
     }
   }
+
+  class WithDefault[A, B](underlying: PriorityMap[A, B], d: A => B) extends
+  Map.WithDefault[A, B](underlying, d) with PriorityMap[A, B] {
+
+    def ordering = underlying.ordering
+
+    override def empty = new WithDefault(underlying.empty, d)
+
+    def +(kv: (A, B)): WithDefault[A, B] = new WithDefault(underlying + kv, d)
+
+    override def -(key: A): WithDefault[A, B] = new WithDefault(underlying - key, d)
+
+    def rangeImpl(from: Option[B], until: Option[B]): WithDefault[A, B] =
+      new WithDefault(underlying.rangeImpl(from, until), d)
+
+    override def withDefault(d: A => B): PriorityMap[A, B] = new WithDefault(underlying, d)
+
+    override def withDefaultValue(d: B): PriorityMap[A, B] = new WithDefault(underlying, x => d)
+  }
+
 }
