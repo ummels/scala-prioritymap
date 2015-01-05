@@ -50,10 +50,10 @@
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A generic trait for immutable priority maps. Concrete classes have to provide
 functionality for the abstract methods in <code>PriorityMap</code>:</p><pre><span class="kw">def</span> get(key: A): <span class="std">Option</span>[B]
 <span class="kw">def</span> iterator: Iterator[(A, B)]
-<span class="kw">def</span> + (kv: (A, B): PriorityMap[A, B]
-<span class="kw">def</span> + [B1 <span class="kw">&gt;:</span> B](kv: (A, B1)): <span class="std">Map</span>[A, B1]
+<span class="kw">def</span> +(kv: (A, B): PriorityMap[A, B]
+<span class="kw">def</span> +[B1 <span class="kw">&gt;:</span> B](kv: (A, B1)): <span class="std">Map</span>[A, B1]
 <span class="kw">def</span> -(key: A): PriorityMap[A, B]
-<span class="kw">def</span> range(from: <span class="std">Option</span>[B], until: <span class="std">Option</span>[B]): PriorityMap[A, B]
+<span class="kw">def</span> rangeImpl(from: <span class="std">Option</span>[B], until: <span class="std">Option</span>[B]): PriorityMap[A, B]
 <span class="kw">implicit</span> <span class="kw">def</span> ordering: Ordering[B]</pre><p>The iterator returned by <code>iterator</code> should generate key/value pairs in the
 order specified by the implicit ordering on values.</p><p>Concrete classes may also override <code>valueSet</code>, whose default implementation
 builds up a new SortedSet from the map's values.
@@ -62,7 +62,7 @@ builds up a new SortedSet from the map's values.
           <div class="superTypes hiddenContent"><a href="PriorityMapLike.html" class="extype" name="de.ummels.prioritymap.PriorityMapLike">PriorityMapLike</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>, <a href="" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]], <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.immutable.Map" class="extype" target="_top">Map</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>], <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.immutable.MapLike" class="extype" target="_top">MapLike</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>, <a href="" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]], <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.Map" class="extype" target="_top">Map</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>], <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.MapLike" class="extype" target="_top">MapLike</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>, <a href="" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]], <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.generic.Subtractable" class="extype" target="_top">Subtractable</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <a href="" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]], <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.PartialFunction" class="extype" target="_top">PartialFunction</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>], (<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>) ⇒ <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>, <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.GenMap" class="extype" target="_top">GenMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>], <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.GenMapLike" class="extype" target="_top">GenMapLike</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>, <a href="" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]], <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.immutable.Iterable" class="extype" target="_top">Iterable</a>[(<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>)], <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.Iterable" class="extype" target="_top">Iterable</a>[(<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>)], <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.IterableLike" class="extype" target="_top">IterableLike</a>[(<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>), <a href="" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]], <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.Equals" class="extype" target="_top">Equals</a>, <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.GenIterable" class="extype" target="_top">GenIterable</a>[(<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>)], <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.GenIterableLike" class="extype" target="_top">GenIterableLike</a>[(<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>), <a href="" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]], <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.immutable.Traversable" class="extype" target="_top">Traversable</a>[(<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>)], <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.Immutable" class="extype" target="_top">Immutable</a>, <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.Traversable" class="extype" target="_top">Traversable</a>[(<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>)], <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.GenTraversable" class="extype" target="_top">GenTraversable</a>[(<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>)], <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.generic.GenericTraversableTemplate" class="extype" target="_top">GenericTraversableTemplate</a>[(<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>), <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.immutable.Iterable" class="extype" target="_top">Iterable</a>], <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.TraversableLike" class="extype" target="_top">TraversableLike</a>[(<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>), <a href="" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]], <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.GenTraversableLike" class="extype" target="_top">GenTraversableLike</a>[(<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>), <a href="" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]], <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.Parallelizable" class="extype" target="_top">Parallelizable</a>[(<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>), <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.parallel.immutable.ParMap" class="extype" target="_top">ParMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]], <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.TraversableOnce" class="extype" target="_top">TraversableOnce</a>[(<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>)], <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.GenTraversableOnce" class="extype" target="_top">GenTraversableOnce</a>[(<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>)], <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.generic.FilterMonadic" class="extype" target="_top">FilterMonadic</a>[(<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>), <a href="" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]], <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.generic.HasNewBuilder" class="extype" target="_top">HasNewBuilder</a>[(<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>), <a href="" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div><div class="toggleContainer block">
             <span class="toggle">Known Subclasses</span>
-            <div class="subClasses hiddenContent"><a href="DefaultPriorityMap.html" class="extype" name="de.ummels.prioritymap.DefaultPriorityMap">DefaultPriorityMap</a></div>
+            <div class="subClasses hiddenContent"><a href="DefaultPriorityMap.html" class="extype" name="de.ummels.prioritymap.DefaultPriorityMap">DefaultPriorityMap</a>, <a href="PriorityMap$$WithDefault.html" class="extype" name="de.ummels.prioritymap.PriorityMap.WithDefault">WithDefault</a></div>
           </div></div>
         
 
@@ -227,7 +227,7 @@ builds up a new SortedSet from the map's values.
         <div id="values" class="values members">
               <h3>Abstract Value Members</h3>
               <ol><li name="de.ummels.prioritymap.PriorityMapLike#+" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="+(kv:(A,B)):de.ummels.prioritymap.PriorityMap[A,B]"></a>
+      <a id="+(kv:(A,B)):This"></a>
       <a id="+((A,B)):PriorityMap[A,B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -238,11 +238,12 @@ builds up a new SortedSet from the map's values.
         <span title="gt4s: $plus" class="name">+</span><span class="params">(<span name="kv">kv: (<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>)</span>)</span><span class="result">: <a href="" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#de.ummels.prioritymap.PriorityMap@+(kv:(A,B)):de.ummels.prioritymap.PriorityMap[A,B]" title="Permalink" target="_top">
+      <a href="../../../index.html#de.ummels.prioritymap.PriorityMap@+(kv:(A,B)):This" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" />
       </a>
     </span>
-      <p class="shortcomment cmt">Add a key/value binding to this priority map.</p><div class="fullcomment"><div class="comment cmt"><p>Add a key/value binding to this priority map.</p></div><dl class="paramcmts block"><dt class="param">kv</dt><dd class="cmt"><p>the key/value pair</p></dd><dt>returns</dt><dd class="cmt"><p>a new priority map with the new binding added to this priority map
+      <p class="shortcomment cmt">Adds a key/value binding to this priority map.</p><div class="fullcomment"><div class="comment cmt"><p>Adds a key/value binding to this priority map.
+</p></div><dl class="paramcmts block"><dt class="param">kv</dt><dd class="cmt"><p>the key/value pair</p></dd><dt>returns</dt><dd class="cmt"><p>a new priority map with the new binding added to this priority map
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="PriorityMapLike.html" class="extype" name="de.ummels.prioritymap.PriorityMapLike">PriorityMapLike</a></dd></dl></div>
     </li><li name="scala.collection.immutable.Map#+" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="+[B1&gt;:B](kv:(A,B1)):scala.collection.immutable.Map[A,B1]"></a>
@@ -329,19 +330,19 @@ builds up a new SortedSet from the map's values.
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="PriorityMapLike.html" class="extype" name="de.ummels.prioritymap.PriorityMapLike">PriorityMapLike</a></dd></dl></div>
-    </li><li name="de.ummels.prioritymap.PriorityMapLike#range" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
-      <a id="range(from:Option[B],until:Option[B]):This"></a>
-      <a id="range(Option[B],Option[B]):PriorityMap[A,B]"></a>
+    </li><li name="de.ummels.prioritymap.PriorityMapLike#rangeImpl" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="rangeImpl(from:Option[B],until:Option[B]):This"></a>
+      <a id="rangeImpl(Option[B],Option[B]):PriorityMap[A,B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">abstract </span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">range</span><span class="params">(<span name="from">from: <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]</span>, <span name="until">until: <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]</span>)</span><span class="result">: <a href="" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]</span>
+        <span class="name">rangeImpl</span><span class="params">(<span name="from">from: <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]</span>, <span name="until">until: <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]</span>)</span><span class="result">: <a href="" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#de.ummels.prioritymap.PriorityMap@range(from:Option[B],until:Option[B]):This" title="Permalink" target="_top">
+      <a href="../../../index.html#de.ummels.prioritymap.PriorityMap@rangeImpl(from:Option[B],until:Option[B]):This" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" />
       </a>
     </span>
@@ -392,7 +393,7 @@ only contains values between the given optional bounds.
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="de.ummels.prioritymap.PriorityMapLike#+" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="+(kv1:(A,B),kv2:(A,B),kvs:(A,B)*):de.ummels.prioritymap.PriorityMap[A,B]"></a>
+      <a id="+(kv1:(A,B),kv2:(A,B),kvs:(A,B)*):This"></a>
       <a id="+((A,B),(A,B),(A,B)*):PriorityMap[A,B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -403,11 +404,11 @@ only contains values between the given optional bounds.
         <span title="gt4s: $plus" class="name">+</span><span class="params">(<span name="kv1">kv1: (<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>)</span>, <span name="kv2">kv2: (<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>)</span>, <span name="kvs">kvs: (<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>)*</span>)</span><span class="result">: <a href="" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#de.ummels.prioritymap.PriorityMap@+(kv1:(A,B),kv2:(A,B),kvs:(A,B)*):de.ummels.prioritymap.PriorityMap[A,B]" title="Permalink" target="_top">
+      <a href="../../../index.html#de.ummels.prioritymap.PriorityMap@+(kv1:(A,B),kv2:(A,B),kvs:(A,B)*):This" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" />
       </a>
     </span>
-      <p class="shortcomment cmt">Add two or more key/value bindings to this priority map.</p><div class="fullcomment"><div class="comment cmt"><p>Add two or more key/value bindings to this priority map.
+      <p class="shortcomment cmt">Adds two or more key/value bindings to this priority map.</p><div class="fullcomment"><div class="comment cmt"><p>Adds two or more key/value bindings to this priority map.
 </p></div><dl class="paramcmts block"><dt class="param">kv1</dt><dd class="cmt"><p>the first key/value pair to add</p></dd><dt class="param">kv2</dt><dd class="cmt"><p>the second key/value pair to add</p></dd><dt class="param">kvs</dt><dd class="cmt"><p>the remaining key/value pairs to add</p></dd><dt>returns</dt><dd class="cmt"><p>a new priority map with the new bindings added to this map
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="PriorityMapLike.html" class="extype" name="de.ummels.prioritymap.PriorityMapLike">PriorityMapLike</a></dd></dl></div>
     </li><li name="scala.collection.immutable.MapLike#+" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -428,7 +429,7 @@ only contains values between the given optional bounds.
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MapLike → MapLike</dd></dl></div>
     </li><li name="de.ummels.prioritymap.PriorityMapLike#++" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="++(kvs:scala.collection.GenTraversableOnce[(A,B)]):de.ummels.prioritymap.PriorityMap[A,B]"></a>
+      <a id="++(kvs:scala.collection.GenTraversableOnce[(A,B)]):This"></a>
       <a id="++(GenTraversableOnce[(A,B)]):PriorityMap[A,B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -439,11 +440,11 @@ only contains values between the given optional bounds.
         <span title="gt4s: $plus$plus" class="name">++</span><span class="params">(<span name="kvs">kvs: <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.GenTraversableOnce" class="extype" target="_top">GenTraversableOnce</a>[(<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>)]</span>)</span><span class="result">: <a href="" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#de.ummels.prioritymap.PriorityMap@++(kvs:scala.collection.GenTraversableOnce[(A,B)]):de.ummels.prioritymap.PriorityMap[A,B]" title="Permalink" target="_top">
+      <a href="../../../index.html#de.ummels.prioritymap.PriorityMap@++(kvs:scala.collection.GenTraversableOnce[(A,B)]):This" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" />
       </a>
     </span>
-      <p class="shortcomment cmt">Add a number of key/value bindings to this priority map.</p><div class="fullcomment"><div class="comment cmt"><p>Add a number of key/value bindings to this priority map.
+      <p class="shortcomment cmt">Adds a number of key/value bindings to this priority map.</p><div class="fullcomment"><div class="comment cmt"><p>Adds a number of key/value bindings to this priority map.
 </p></div><dl class="paramcmts block"><dt class="param">kvs</dt><dd class="cmt"><p>a traversable object consisting of key/value pairs</p></dd><dt>returns</dt><dd class="cmt"><p>a new priority map with the new bindings added to this map
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="PriorityMapLike.html" class="extype" name="de.ummels.prioritymap.PriorityMapLike">PriorityMapLike</a></dd></dl></div>
     </li><li name="scala.collection.immutable.MapLike#++" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -1175,6 +1176,23 @@ only contains values between the given optional bounds.
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>IterableLike → TraversableLike → TraversableOnce → GenTraversableOnce</dd></dl></div>
+    </li><li name="de.ummels.prioritymap.PriorityMapLike#firstKey" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="firstKey:Option[A]"></a>
+      <a id="firstKey:Option[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">firstKey</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#de.ummels.prioritymap.PriorityMap@firstKey:Option[A]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Optionally returns the first key of this priority map.</p><div class="fullcomment"><div class="comment cmt"><p>Optionally returns the first key of this priority map.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="PriorityMapLike.html" class="extype" name="de.ummels.prioritymap.PriorityMapLike">PriorityMapLike</a></dd></dl></div>
     </li><li name="de.ummels.prioritymap.PriorityMapLike#firstValue" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="firstValue:Option[B]"></a>
       <a id="firstValue:Option[B]"></a>
@@ -1210,7 +1228,7 @@ only contains values between the given optional bounds.
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableLike → GenTraversableLike → FilterMonadic</dd></dl></div>
     </li><li name="scala.collection.generic.GenericTraversableTemplate#flatten" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="flatten[B&lt;:&lt;?&gt;](implicitasTraversable:&lt;?&gt;):CC[B]"></a>
+      <a id="flatten[B](implicitasTraversable:A=&gt;scala.collection.GenTraversableOnce[B]):CC[B]"></a>
       <a id="flatten[B](((A,B))⇒GenTraversableOnce[B]):Iterable[B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1328,13 +1346,12 @@ only contains values between the given optional bounds.
       </a>
     </span>
       <p class="shortcomment cmt">Returns a new priority map of the same type as this priority map that
-only contains values greater than or equal to the given lower bound
-</p><div class="fullcomment"><div class="comment cmt"><p>Returns a new priority map of the same type as this priority map that
-only contains values greater than or equal to the given lower bound
+only contains values greater than or equal to the given lower bound.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a new priority map of the same type as this priority map that
+only contains values greater than or equal to the given lower bound.
 </p></div><dl class="paramcmts block"><dt class="param">from</dt><dd class="cmt"><p>the lower-bound (inclusive) on values
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="PriorityMapLike.html" class="extype" name="de.ummels.prioritymap.PriorityMapLike">PriorityMapLike</a></dd></dl></div>
     </li><li name="scala.collection.generic.GenericTraversableTemplate#genericBuilder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="genericBuilder[B&lt;:&lt;?&gt;]:scala.collection.mutable.Builder[B,CC[B]]"></a>
+      <a id="genericBuilder[B]:scala.collection.mutable.Builder[B,CC[B]]"></a>
       <a id="genericBuilder[B]:Builder[B,Iterable[B]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -1659,6 +1676,23 @@ only contains values greater than or equal to the given lower bound
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableLike → GenTraversableLike</dd></dl></div>
+    </li><li name="de.ummels.prioritymap.PriorityMapLike#lastKey" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="lastKey:Option[A]"></a>
+      <a id="lastKey:Option[A]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">lastKey</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#de.ummels.prioritymap.PriorityMap@lastKey:Option[A]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Optionally returns the last key of this priority map.</p><div class="fullcomment"><div class="comment cmt"><p>Optionally returns the last key of this priority map.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="PriorityMapLike.html" class="extype" name="de.ummels.prioritymap.PriorityMapLike">PriorityMapLike</a></dd></dl></div>
     </li><li name="scala.collection.TraversableLike#lastOption" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="lastOption:Option[A]"></a>
       <a id="lastOption:Option[(A,B)]"></a>
@@ -1743,7 +1777,8 @@ only contains values greater than or equal to the given lower bound
         <img src="../../../lib/permalink.png" />
       </a>
     </span>
-      <p class="shortcomment cmt">Transforms this map by applying a function to every retrieved value.</p><div class="fullcomment"><div class="comment cmt"><p>Transforms this map by applying a function to every retrieved value.</p></div><dl class="paramcmts block"><dt class="param">f</dt><dd class="cmt"><p>the function used to transform values of this map</p></dd><dt>returns</dt><dd class="cmt"><p>a new priority map view which maps every key of this map
+      <p class="shortcomment cmt">Transforms this map by applying a function to every retrieved value.</p><div class="fullcomment"><div class="comment cmt"><p>Transforms this map by applying a function to every retrieved value.
+</p></div><dl class="paramcmts block"><dt class="param">f</dt><dd class="cmt"><p>the function used to transform values of this map</p></dd><dt>returns</dt><dd class="cmt"><p>a new priority map that maps every key of this map
          to <code>f(this(key))</code>
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="PriorityMapLike.html" class="extype" name="de.ummels.prioritymap.PriorityMapLike">PriorityMapLike</a></dd></dl></div>
     </li><li name="scala.collection.immutable.MapLike#mapValues" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -1797,6 +1832,27 @@ only contains values greater than or equal to the given lower bound
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>TraversableOnce → GenTraversableOnce</dd></dl></div>
+    </li><li name="de.ummels.prioritymap.PriorityMapLike#merged" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="merged(kvs:scala.collection.GenTraversableOnce[(A,B)])(f:(B,B)=&gt;B):This"></a>
+      <a id="merged(GenTraversableOnce[(A,B)])((B,B)⇒B):PriorityMap[A,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">merged</span><span class="params">(<span name="kvs">kvs: <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.GenTraversableOnce" class="extype" target="_top">GenTraversableOnce</a>[(<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>)]</span>)</span><span class="params">(<span name="f">f: (<span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>) ⇒ <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span></span>)</span><span class="result">: <a href="" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#de.ummels.prioritymap.PriorityMap@merged(kvs:scala.collection.GenTraversableOnce[(A,B)])(f:(B,B)=&gt;B):This" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Merges a number of key/value bindings into this priority map.</p><div class="fullcomment"><div class="comment cmt"><p>Merges a number of key/value bindings into this priority map.</p><p>If a key is contained in both this map and the given bindings, computes
+the new value by applying the given merge function to the existing value
+and the new value.
+</p></div><dl class="paramcmts block"><dt class="param">kvs</dt><dd class="cmt"><p>a traversable object consisting of key/value pairs</p></dd><dt class="param">f</dt><dd class="cmt"><p>the merge function</p></dd><dt>returns</dt><dd class="cmt"><p>a new priority map with the new bindings merged into this map
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="PriorityMapLike.html" class="extype" name="de.ummels.prioritymap.PriorityMapLike">PriorityMapLike</a></dd></dl></div>
     </li><li name="scala.collection.TraversableOnce#min" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="min[B&gt;:A](implicitcmp:Ordering[B]):A"></a>
       <a id="min[B&gt;:(A,B)](Ordering[B]):(A,B)"></a>
@@ -1899,7 +1955,7 @@ only contains values greater than or equal to the given lower bound
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="de.ummels.prioritymap.PriorityMap#newBuilder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="de.ummels.prioritymap.PriorityMap#newBuilder" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="newBuilder:scala.collection.mutable.Builder[(A,B),de.ummels.prioritymap.PriorityMap[A,B]]"></a>
       <a id="newBuilder:Builder[(A,B),PriorityMap[A,B]]"></a>
       <h4 class="signature">
@@ -1915,7 +1971,7 @@ only contains values greater than or equal to the given lower bound
         <img src="../../../lib/permalink.png" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a> → MapLike → GenericTraversableTemplate → TraversableLike → HasNewBuilder</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[this] </dd><dt>Definition Classes</dt><dd><a href="" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a> → MapLike → GenericTraversableTemplate → TraversableLike → HasNewBuilder</dd></dl></div>
     </li><li name="scala.collection.TraversableOnce#nonEmpty" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="nonEmpty:Boolean"></a>
       <a id="nonEmpty:Boolean"></a>
@@ -2297,23 +2353,23 @@ only contains values between the given bounds.
                 <span class="name">@migration</span>
               
         </dd><dt>Migration</dt><dd class="cmt"><p><i>(Changed in version 2.9.0)</i> The behavior of <code>scanRight</code> has changed. The previous behavior can be reproduced with scanRight.reverse.</p></dd></dl></div>
-    </li><li name="scala.collection.immutable.Map#seq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="seq:scala.collection.immutable.Map[A,B]"></a>
-      <a id="seq:Map[A,B]"></a>
+    </li><li name="de.ummels.prioritymap.PriorityMap#seq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="seq:de.ummels.prioritymap.PriorityMap[A,B]"></a>
+      <a id="seq:PriorityMap[A,B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">seq</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.immutable.Map" class="extype" target="_top">Map</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]</span>
+        <span class="name">seq</span><span class="result">: <a href="" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#de.ummels.prioritymap.PriorityMap@seq:scala.collection.immutable.Map[A,B]" title="Permalink" target="_top">
+      <a href="../../../index.html#de.ummels.prioritymap.PriorityMap@seq:de.ummels.prioritymap.PriorityMap[A,B]" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" />
       </a>
     </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Map → Map → GenMap → GenMapLike → Iterable → Iterable → GenIterable → Traversable → Traversable → GenTraversable → Parallelizable → TraversableOnce → GenTraversableOnce</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a> → Map → Map → GenMap → GenMapLike → Iterable → Iterable → GenIterable → Traversable → Traversable → GenTraversable → Parallelizable → TraversableOnce → GenTraversableOnce</dd></dl></div>
     </li><li name="scala.collection.TraversableOnce#size" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="size:Int"></a>
       <a id="size:Int"></a>
@@ -2425,7 +2481,7 @@ only contains values between the given bounds.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">stringPrefix</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+        <span class="name">stringPrefix</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#de.ummels.prioritymap.PriorityMap@stringPrefix:String" title="Permalink" target="_top">
@@ -2869,7 +2925,7 @@ only contains values between the given bounds.
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>MapLike</dd></dl></div>
     </li><li name="scala.collection.generic.GenericTraversableTemplate#transpose" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="transpose[B&lt;:&lt;?&gt;](implicitasTraversable:&lt;?&gt;):CC[CC[B]@scala.annotation.unchecked.uncheckedVariance]"></a>
+      <a id="transpose[B](implicitasTraversable:A=&gt;scala.collection.GenTraversableOnce[B]):CC[CC[B]@scala.annotation.unchecked.uncheckedVariance]"></a>
       <a id="transpose[B](((A,B))⇒GenTraversableOnce[B]):Iterable[Iterable[B]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -2905,13 +2961,12 @@ only contains values between the given bounds.
       </a>
     </span>
       <p class="shortcomment cmt">Returns a new priority map of the same type as this priority map that
-only contains values smaller than given upper bound
-</p><div class="fullcomment"><div class="comment cmt"><p>Returns a new priority map of the same type as this priority map that
-only contains values smaller than given upper bound
+only contains values smaller than given upper bound.</p><div class="fullcomment"><div class="comment cmt"><p>Returns a new priority map of the same type as this priority map that
+only contains values smaller than given upper bound.
 </p></div><dl class="paramcmts block"><dt class="param">until</dt><dd class="cmt"><p>the upper-bound (exclusive) on values
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="PriorityMapLike.html" class="extype" name="de.ummels.prioritymap.PriorityMapLike">PriorityMapLike</a></dd></dl></div>
     </li><li name="scala.collection.generic.GenericTraversableTemplate#unzip" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="unzip[A1&lt;:&lt;?&gt;,A2&lt;:&lt;?&gt;](implicitasPair:&lt;?&gt;):(CC[A1],CC[A2])"></a>
+      <a id="unzip[A1,A2](implicitasPair:A=&gt;(A1,A2)):(CC[A1],CC[A2])"></a>
       <a id="unzip[A1,A2](((A,B))⇒(A1,A2)):(Iterable[A1],Iterable[A2])"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -2928,7 +2983,7 @@ only contains values smaller than given upper bound
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>GenericTraversableTemplate</dd></dl></div>
     </li><li name="scala.collection.generic.GenericTraversableTemplate#unzip3" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="unzip3[A1&lt;:&lt;?&gt;,A2&lt;:&lt;?&gt;,A3&lt;:&lt;?&gt;](implicitasTriple:&lt;?&gt;):(CC[A1],CC[A2],CC[A3])"></a>
+      <a id="unzip3[A1,A2,A3](implicitasTriple:A=&gt;(A1,A2,A3)):(CC[A1],CC[A2],CC[A3])"></a>
       <a id="unzip3[A1,A2,A3](((A,B))⇒(A1,A2,A3)):(Iterable[A1],Iterable[A2],Iterable[A3])"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -2945,7 +3000,7 @@ only contains values smaller than given upper bound
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>GenericTraversableTemplate</dd></dl></div>
     </li><li name="de.ummels.prioritymap.PriorityMapLike#updated" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="updated(key:A,value:B):de.ummels.prioritymap.PriorityMap[A,B]"></a>
+      <a id="updated(key:A,value:B):This"></a>
       <a id="updated(A,B):PriorityMap[A,B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -2956,11 +3011,12 @@ only contains values smaller than given upper bound
         <span class="name">updated</span><span class="params">(<span name="key">key: <span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span></span>, <span name="value">value: <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span></span>)</span><span class="result">: <a href="" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#de.ummels.prioritymap.PriorityMap@updated(key:A,value:B):de.ummels.prioritymap.PriorityMap[A,B]" title="Permalink" target="_top">
+      <a href="../../../index.html#de.ummels.prioritymap.PriorityMap@updated(key:A,value:B):This" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" />
       </a>
     </span>
-      <p class="shortcomment cmt">Add a key/value binding to this priority map.</p><div class="fullcomment"><div class="comment cmt"><p>Add a key/value binding to this priority map.</p></div><dl class="paramcmts block"><dt class="param">key</dt><dd class="cmt"><p>the key</p></dd><dt class="param">value</dt><dd class="cmt"><p>the value</p></dd><dt>returns</dt><dd class="cmt"><p>a new priority map with the new binding added to this map
+      <p class="shortcomment cmt">Add a key/value binding to this priority map.</p><div class="fullcomment"><div class="comment cmt"><p>Add a key/value binding to this priority map.
+</p></div><dl class="paramcmts block"><dt class="param">key</dt><dd class="cmt"><p>the key</p></dd><dt class="param">value</dt><dd class="cmt"><p>the value</p></dd><dt>returns</dt><dd class="cmt"><p>a new priority map with the new binding added to this map
 </p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="PriorityMapLike.html" class="extype" name="de.ummels.prioritymap.PriorityMapLike">PriorityMapLike</a></dd></dl></div>
     </li><li name="scala.collection.immutable.MapLike#updated" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="updated[B1&gt;:B](key:A,value:B1):scala.collection.immutable.Map[A,B1]"></a>
@@ -3136,8 +3192,28 @@ only contains values smaller than given upper bound
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="de.ummels.prioritymap.PriorityMap#withDefault" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="withDefault(d:A=&gt;B):de.ummels.prioritymap.PriorityMap[A,B]"></a>
+      <a id="withDefault((A)⇒B):PriorityMap[A,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">withDefault</span><span class="params">(<span name="d">d: (<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>) ⇒ <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span></span>)</span><span class="result">: <a href="" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#de.ummels.prioritymap.PriorityMap@withDefault(d:A=&gt;B):de.ummels.prioritymap.PriorityMap[A,B]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The same priority map with a given default function.</p><div class="fullcomment"><div class="comment cmt"><p>The same priority map with a given default function.
+Note: <code>get</code>, <code>contains</code>, <code>iterator</code>, <code>keys</code>, etc. are not affected by <code>withDefault</code>.</p><p>Invoking transformer methods (e.g. <code>map</code>) will not preserve the default value.
+</p></div><dl class="paramcmts block"><dt class="param">d</dt><dd class="cmt"><p>the function mapping keys to values, used for non-present keys</p></dd><dt>returns</dt><dd class="cmt"><p>a wrapper of this priority map with a default function
+</p></dd></dl></div>
     </li><li name="scala.collection.immutable.Map#withDefault" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="withDefault[B1&lt;:&lt;?&gt;](d:&lt;?&gt;):scala.collection.immutable.Map[A,B1]"></a>
+      <a id="withDefault[B1&gt;:B](d:A=&gt;B1):scala.collection.immutable.Map[A,B1]"></a>
       <a id="withDefault[B1&gt;:B]((A)⇒B1):Map[A,B1]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -3153,8 +3229,28 @@ only contains values smaller than given upper bound
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Map</dd></dl></div>
+    </li><li name="de.ummels.prioritymap.PriorityMap#withDefaultValue" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="withDefaultValue(d:B):de.ummels.prioritymap.PriorityMap[A,B]"></a>
+      <a id="withDefaultValue(B):PriorityMap[A,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">withDefaultValue</span><span class="params">(<span name="d">d: <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span></span>)</span><span class="result">: <a href="" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMap.B">B</span>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#de.ummels.prioritymap.PriorityMap@withDefaultValue(d:B):de.ummels.prioritymap.PriorityMap[A,B]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">The same priority map with a given default value.</p><div class="fullcomment"><div class="comment cmt"><p>The same priority map with a given default value.
+Note: <code>get</code>, <code>contains</code>, <code>iterator</code>, <code>keys</code>, etc. are not affected by <code>withDefaultValue</code>.</p><p>Invoking transformer methods (e.g. <code>map</code>) will not preserve the default value.
+</p></div><dl class="paramcmts block"><dt class="param">d</dt><dd class="cmt"><p>default value used for non-present keys</p></dd><dt>returns</dt><dd class="cmt"><p>a wrapper of this priority map with a default value
+</p></dd></dl></div>
     </li><li name="scala.collection.immutable.Map#withDefaultValue" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="withDefaultValue[B1&lt;:&lt;?&gt;](d:&lt;?&gt;):scala.collection.immutable.Map[A,B1]"></a>
+      <a id="withDefaultValue[B1&gt;:B](d:B1):scala.collection.immutable.Map[A,B1]"></a>
       <a id="withDefaultValue[B1&gt;:B](B1):Map[A,B1]"></a>
       <h4 class="signature">
       <span class="modifier_kind">

@@ -146,10 +146,10 @@ keys to values and a sorted map from values to sets of keys.</p>
       <p class="shortcomment cmt">A generic trait for immutable priority maps.</p><div class="fullcomment"><div class="comment cmt"><p>A generic trait for immutable priority maps. Concrete classes have to provide
 functionality for the abstract methods in <code>PriorityMap</code>:</p><pre><span class="kw">def</span> get(key: A): <span class="std">Option</span>[B]
 <span class="kw">def</span> iterator: Iterator[(A, B)]
-<span class="kw">def</span> + (kv: (A, B): PriorityMap[A, B]
-<span class="kw">def</span> + [B1 <span class="kw">&gt;:</span> B](kv: (A, B1)): <span class="std">Map</span>[A, B1]
+<span class="kw">def</span> +(kv: (A, B): PriorityMap[A, B]
+<span class="kw">def</span> +[B1 <span class="kw">&gt;:</span> B](kv: (A, B1)): <span class="std">Map</span>[A, B1]
 <span class="kw">def</span> -(key: A): PriorityMap[A, B]
-<span class="kw">def</span> range(from: <span class="std">Option</span>[B], until: <span class="std">Option</span>[B]): PriorityMap[A, B]
+<span class="kw">def</span> rangeImpl(from: <span class="std">Option</span>[B], until: <span class="std">Option</span>[B]): PriorityMap[A, B]
 <span class="kw">implicit</span> <span class="kw">def</span> ordering: Ordering[B]</pre><p>The iterator returned by <code>iterator</code> should generate key/value pairs in the
 order specified by the implicit ordering on values.</p><p>Concrete classes may also override <code>valueSet</code>, whose default implementation
 builds up a new SortedSet from the map's values.
@@ -170,10 +170,13 @@ builds up a new SortedSet from the map's values.
         <img src="../../../lib/permalink.png" />
       </a>
     </span>
-      <p class="shortcomment cmt">A template for immutable priority maps.</p><div class="fullcomment"><div class="comment cmt"><p>A template for immutable priority maps.
+      <p class="shortcomment cmt">A template trait for immutable priority maps.</p><div class="fullcomment"><div class="comment cmt"><p>A template trait for immutable priority maps.
 To create a concrete priority map, you need to implement the following methods
-in addition to those of <code>MapLike</code>:</p><pre><span class="kw">def</span> + (kv: (A, B): PriorityMap[A, B]
-<span class="kw">def</span> range(from: <span class="std">Option</span>[B], until: <span class="std">Option</span>[B]): PriorityMap[A, B]</pre></div></div>
+in addition to those of <code>MapLike</code>:</p><pre><span class="kw">def</span> +(kv: (A, B): This
+<span class="kw">def</span> rangeImpl(from: <span class="std">Option</span>[B], until: <span class="std">Option</span>[B]): This</pre><p>The iterator returned by <code>iterator</code> should generate key/value pairs in the
+order specified by the implicit ordering on values.</p><p>Concrete classes may also override <code>valueSet</code>, whose default implementation
+builds up a new SortedSet from the map's values.
+</p></div></div>
     </li></ol>
             </div>
 
