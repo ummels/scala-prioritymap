@@ -6,7 +6,7 @@ organization := "de.ummels"
 
 description := "Immutable priority maps for Scala"
 
-licenses := Seq("BSD-style" -> url("http://opensource.org/licenses/ISC"))
+licenses := Seq("ISC License" -> url("http://opensource.org/licenses/ISC"))
 
 homepage := Some(url("https://github.com/ummels/scala-prioritymap"))
 
