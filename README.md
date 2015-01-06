@@ -24,6 +24,8 @@ If you use [sbt](http://www.scala-sbt.org/), simply add the following dependency
 
     libraryDependencies += "de.ummels" %% "scala-prioritymap" % "0.2.0"
 
+See the [release notes](RELEASE.md) if you upgrade from an earlier release.
+
 Usage
 -----
 
