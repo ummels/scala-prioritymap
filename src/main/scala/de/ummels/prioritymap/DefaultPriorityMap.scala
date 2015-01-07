@@ -103,7 +103,7 @@ object DefaultPriorityMap {
 
   /** An empty priority map. */
   def empty[A, B](implicit ord: Ordering[B]): DefaultPriorityMap[A, B] =
-    new DefaultPriorityMap(Map.empty, SortedMap.empty)
+    new DefaultPriorityMap()
 
   /** A priority map that contains the given key/value bindings.
     *
