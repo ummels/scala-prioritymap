@@ -76,7 +76,7 @@ trait PriorityMapLike[A, B, +This <: PriorityMapLike[A, B, This] with PriorityMa
     }
 
   override def filterKeys(p: A => Boolean): PriorityMap[A, B] =
-    new FilteredKeys(p) with PriorityMap.View[A, B] {
+    new FilteredKeys(p) with PriorityMap.Default[A, B] {
       implicit def ordering: Ordering[B] = self.ordering
 
       def rangeImpl(from: Option[B], until: Option[B]) =
