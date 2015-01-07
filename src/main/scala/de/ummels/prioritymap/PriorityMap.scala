@@ -116,7 +116,7 @@ object PriorityMap {
     }
   }
 
-  class WithDefault[A, B](underlying: PriorityMap[A, B], d: A => B) extends
+  private[prioritymap] class WithDefault[A, B](underlying: PriorityMap[A, B], d: A => B) extends
   Map.WithDefault[A, B](underlying, d) with PriorityMap[A, B] {
 
     def ordering = underlying.ordering
