@@ -12,6 +12,7 @@ abstract class PriorityMapFactory[CC[A, B] <: PriorityMap[A, B] with PriorityMap
   /** An empty priority map. */
   def empty[A, B](implicit ord: Ordering[B]): CC[A, B]
 
+  /** The standard builder for priority maps. */
   def newBuilder[A, B](implicit ord: Ordering[B]): mutable.Builder[(A, B), CC[A, B]] =
     new mutable.MapBuilder[A, B, CC[A, B]](empty) {
       override def +=(x: (A, B)): this.type = {
