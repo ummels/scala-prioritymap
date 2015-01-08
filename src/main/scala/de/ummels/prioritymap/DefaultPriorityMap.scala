@@ -8,8 +8,8 @@ import scala.collection.immutable._
  * Default implementation of immutable priority maps using two maps: a regular map from
  * keys to values and a sorted map from values to sets of keys.
  */
-final class DefaultPriorityMap[A, B] private (map: Map[A, B], bags: SortedMap[B, Set[A]])
-                                             (implicit val ordering: Ordering[B])
+final class DefaultPriorityMap[A, B] private(map: Map[A, B], bags: SortedMap[B, Set[A]])
+                                            (implicit val ordering: Ordering[B])
   extends PriorityMap[A, B]
   with PriorityMapLike[A, B, DefaultPriorityMap[A, B]]
   with Serializable {
@@ -74,7 +74,7 @@ final class DefaultPriorityMap[A, B] private (map: Map[A, B], bags: SortedMap[B,
 
   override def valueSet = bags.keySet
 
-  def rangeImpl(from: Option[B], until: Option[B]): DefaultPriorityMap[A, B]  = {
+  def rangeImpl(from: Option[B], until: Option[B]): DefaultPriorityMap[A, B] = {
     val bags1 = bags.rangeImpl(from, until)
     val map1 = map.filterKeys(k => (map.get(k) map bags1.contains) getOrElse true)
     new DefaultPriorityMap[A, B](map1, bags1)
