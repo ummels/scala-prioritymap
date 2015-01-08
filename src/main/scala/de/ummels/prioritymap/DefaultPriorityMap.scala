@@ -1,7 +1,6 @@
 package de.ummels.prioritymap
 
 import scala.collection.parallel.immutable.ParMap
-import scala.collection.{mutable, GenTraversableOnce}
 import scala.collection.generic.CanBuildFrom
 import scala.collection.immutable._
 
@@ -95,49 +94,13 @@ final class DefaultPriorityMap[A, B] private (map: Map[A, B], bags: SortedMap[B,
 }
 
 /** This object provides a set of operations needed to create priority maps. */
-object DefaultPriorityMap {
+object DefaultPriorityMap extends PriorityMapFactory[DefaultPriorityMap] {
 
   import language.implicitConversions
 
-  type Coll = DefaultPriorityMap[_, _]
-
-  /** An empty priority map. */
   def empty[A, B](implicit ord: Ordering[B]): DefaultPriorityMap[A, B] =
     new DefaultPriorityMap()
 
-  /** A priority map that contains the given key/value bindings.
-    *
-    * @tparam A the key type
-    * @tparam B the value type
-    * @param kvs the key/value pairs that make up the map
-    * @param ord the implicit ordering on values
-    * @return a new priority map with the given bindings
-    */
-  def apply[A, B](kvs: (A, B)*)(implicit ord: Ordering[B]): DefaultPriorityMap[A, B] =
-    DefaultPriorityMap.empty[A, B] ++ kvs
-
-  /** A priority map that contains with the bindings from the given map.
-    *
-    * @tparam A the key type
-    * @tparam B the value type
-    * @param m the map
-    * @param ord the implicit ordering on values
-    * @return a new priority map with the bindings form the given map
-    */
-  def fromMap[A, B](m: Map[A, B])(implicit ord: Ordering[B]): DefaultPriorityMap[A, B] = {
-    val empty = SortedMap.empty[B, Set[A]]
-    val bags = (empty /: m)((bs, kv) =>
-      bs updated (kv._2, bs.getOrElse(kv._2, Set.empty[A]) + kv._1))
-    new DefaultPriorityMap[A, B](m, bags)
-  }
-
-  def newBuilder[A, B](implicit ord: Ordering[B]): mutable.Builder[(A, B), DefaultPriorityMap[A, B]] =
-    new mutable.MapBuilder[A, B, Map[A, B]](Map.empty) mapResult (fromMap(_))
-
   implicit def canBuildFrom[A, B](implicit ord: Ordering[B]): CanBuildFrom[Coll, (A, B), DefaultPriorityMap[A, B]] =
-    new CanBuildFrom[Coll, (A, B), DefaultPriorityMap[A, B]] {
-      def apply(from: Coll) = newBuilder[A, B]
-
-      def apply() = newBuilder[A, B]
-    }
+    new PriorityMapCanBuildFrom[A, B]
 }
