@@ -99,7 +99,7 @@ object DefaultPriorityMap extends PriorityMapFactory[DefaultPriorityMap] {
   import language.implicitConversions
 
   def empty[A, B](implicit ord: Ordering[B]): DefaultPriorityMap[A, B] =
-    new DefaultPriorityMap()
+    new DefaultPriorityMap[A, B]
 
   implicit def canBuildFrom[A, B](implicit ord: Ordering[B]): CanBuildFrom[Coll, (A, B), DefaultPriorityMap[A, B]] =
     new PriorityMapCanBuildFrom[A, B]
