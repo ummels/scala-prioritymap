@@ -4,10 +4,7 @@ import scala.collection.parallel.immutable.ParMap
 import scala.collection.generic.CanBuildFrom
 import scala.collection.immutable._
 
-/**
- * Default implementation of immutable priority maps using two maps: a regular map from
- * keys to values and a sorted map from values to sets of keys.
- */
+/** Default implementation of immutable priority maps using a pair of maps. */
 final class DefaultPriorityMap[A, B] private(map: Map[A, B], bags: SortedMap[B, Set[A]])
                                             (implicit val ordering: Ordering[B])
   extends PriorityMap[A, B]

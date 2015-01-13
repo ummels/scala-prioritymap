@@ -28,7 +28,7 @@ trait PriorityMapLike[A, B, +This <: PriorityMapLike[A, B, This] with PriorityMa
     */
   def +(kv: (A, B)): This
 
-  /** Add a key/value binding to this priority map.
+  /** Adds a key/value binding to this priority map.
     *
     * @param key the key
     * @param value the value
