@@ -1,9 +1,9 @@
 package de.ummels.prioritymap
 
-import collection.mutable
+import scala.collection.mutable
 
-/** The canonical builder for priority maps, working with the `+` method
-  * to add new elements.
+/** The canonical builder for priority maps, using the `+` method
+  * to add new elements to an empty priority map.
   */
 class PriorityMapBuilder[A, B, Coll <: PriorityMap[A, B] with PriorityMapLike[A, B, Coll]](empty: Coll)
 extends mutable.MapBuilder[A, B, Coll](empty) {
