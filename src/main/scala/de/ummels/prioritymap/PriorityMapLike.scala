@@ -55,7 +55,6 @@ trait PriorityMapLike[A, B, +This <: PriorityMapLike[A, B, This] with PriorityMa
   def ++(kvs: GenTraversableOnce[(A, B)]): This =
     ((repr: This) /: kvs)(_ + _)
 
-
   /** Merges a number of key/value bindings into this priority map.
     *
     * If a key is contained in both this map and the given bindings, computes
@@ -73,14 +72,6 @@ trait PriorityMapLike[A, B, +This <: PriorityMapLike[A, B, This] with PriorityMa
         case None => m + kv
         case Some(v1) => m + (k -> f(v1, v2))
       }
-    }
-
-  override def filterKeys(p: A => Boolean): PriorityMap[A, B] =
-    new FilteredKeys(p) with PriorityMap.Default[A, B] {
-      implicit def ordering: Ordering[B] = self.ordering
-
-      def rangeImpl(from: Option[B], until: Option[B]) =
-        self.rangeImpl(from, until).filterKeys(p)
     }
 
   /** Transforms this map by applying a function to every retrieved value.
@@ -138,4 +129,14 @@ trait PriorityMapLike[A, B, +This <: PriorityMapLike[A, B, This] with PriorityMa
 
   /** Returns the values of this priority map as a sorted set. */
   def valueSet: SortedSet[B] = SortedSet.empty[B] ++ values
+
+  override protected[this] def newBuilder = new PriorityMapBuilder[A, B, This](empty)
+
+  override def filterKeys(p: A => Boolean): PriorityMap[A, B] =
+    new FilteredKeys(p) with PriorityMap.Default[A, B] {
+      implicit def ordering: Ordering[B] = self.ordering
+
+      def rangeImpl(from: Option[B], until: Option[B]) =
+        self.rangeImpl(from, until).filterKeys(p)
+    }
 }

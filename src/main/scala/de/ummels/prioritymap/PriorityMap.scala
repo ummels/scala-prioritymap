@@ -51,8 +51,6 @@ trait PriorityMap[A, B] extends Map[A, B] with PriorityMapLike[A, B, PriorityMap
     */
   def withDefaultValue(d: B): PriorityMap[A, B] = new WithDefault(this, x => d)
 
-  override protected[this] def newBuilder = PriorityMap.newBuilder
-
   override def stringPrefix = "PriorityMap"
 }
 
