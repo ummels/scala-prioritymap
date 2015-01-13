@@ -15,8 +15,7 @@ import scala.collection.immutable._
   * The iterator returned by `iterator` should generate key/value pairs in the
   * order specified by the implicit ordering on values.
   *
-  * Concrete classes may also override `valueSet`, whose default implementation
-  * builds up a new SortedSet from the map's values.
+  * Concrete classes may also override other methods for efficiency.
   */
 trait PriorityMapLike[A, B, +This <: PriorityMapLike[A, B, This] with PriorityMap[A, B]]
   extends MapLike[A, B, This] { self =>
