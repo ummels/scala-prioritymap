@@ -57,16 +57,10 @@ final class DefaultPriorityMap[A, B] private(map: Map[A, B], bags: SortedMap[B, 
 
   override def size = map.size
 
-  override def contains(key: A) = map contains key
-
-  override def isDefinedAt(key: A) = map contains key
-
   override def last = {
     val greatestVal = bags.lastKey
     (bags(greatestVal).last, greatestVal)
   }
-
-  override def lastOption = if (map.isEmpty) None else Some(last)
 
   override def lastValue = if (bags.nonEmpty) Some(bags.lastKey) else None
 
