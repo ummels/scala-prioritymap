@@ -78,23 +78,35 @@ object PriorityMap extends PriorityMapFactory[PriorityMap] {
     }
   }
 
-  private[prioritymap] class WithDefault[A, B](underlying: PriorityMap[A, B], d: A => B) extends
-  Map.WithDefault[A, B](underlying, d) with PriorityMap[A, B] {
+  private[prioritymap] class WithDefault[A, B](underlying: PriorityMap[A, B], default: A => B)
+    extends Map.WithDefault[A, B](underlying, default)
+    with PriorityMap[A, B]
+    with PriorityMapLike[A, B, WithDefault[A, B]] {
 
     def ordering = underlying.ordering
 
-    override def empty = new WithDefault(underlying.empty, d)
+    override def empty = new WithDefault(underlying.empty, default)
 
-    def +(kv: (A, B)): WithDefault[A, B] = new WithDefault(underlying + kv, d)
+    def +(kv: (A, B)): WithDefault[A, B] = new WithDefault(underlying + kv, default)
 
-    override def -(key: A): WithDefault[A, B] = new WithDefault(underlying - key, d)
+    override def -(key: A): WithDefault[A, B] = new WithDefault(underlying - key, default)
 
     def rangeImpl(from: Option[B], until: Option[B]): WithDefault[A, B] =
-      new WithDefault(underlying.rangeImpl(from, until), d)
+      new WithDefault(underlying.rangeImpl(from, until), default)
 
     override def withDefault(d: A => B): PriorityMap[A, B] = new WithDefault(underlying, d)
 
     override def withDefaultValue(d: B): PriorityMap[A, B] = new WithDefault(underlying, x => d)
+
+    /* The following methods are only overridden for efficiency. */
+
+    override def last = underlying.last
+
+    override def valueSet = underlying.valueSet
+
+    override def tail = new WithDefault(underlying.tail, default)
+
+    override def init = new WithDefault(underlying.init, default)
   }
 
 }
