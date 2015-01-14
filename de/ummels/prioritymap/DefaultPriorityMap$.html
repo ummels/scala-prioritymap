@@ -43,13 +43,13 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">DefaultPriorityMap</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <span class="name">DefaultPriorityMap</span><span class="result"> extends <a href="PriorityMapFactory.html" class="extype" name="de.ummels.prioritymap.PriorityMapFactory">PriorityMapFactory</a>[<a href="DefaultPriorityMap.html" class="extype" name="de.ummels.prioritymap.DefaultPriorityMap">DefaultPriorityMap</a>] with <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4>
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>This object provides a set of operations needed to create priority maps.</p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.Serializable" class="extype" target="_top">Serializable</a>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.Serializable" class="extype" target="_top">Serializable</a>, <span class="extype" name="java.io.Serializable">Serializable</span>, <a href="PriorityMapFactory.html" class="extype" name="de.ummels.prioritymap.PriorityMapFactory">PriorityMapFactory</a>[<a href="DefaultPriorityMap.html" class="extype" name="de.ummels.prioritymap.DefaultPriorityMap">DefaultPriorityMap</a>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -67,7 +67,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="de.ummels.prioritymap.DefaultPriorityMap"><span>DefaultPriorityMap</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="de.ummels.prioritymap.DefaultPriorityMap"><span>DefaultPriorityMap</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="de.ummels.prioritymap.PriorityMapFactory"><span>PriorityMapFactory</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -89,8 +89,8 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="de.ummels.prioritymap.DefaultPriorityMap.Coll" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="Coll=de.ummels.prioritymap.DefaultPriorityMap[_,_]"></a>
+              <ol><li name="de.ummels.prioritymap.PriorityMapFactory.Coll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Coll=CC[_,_]"></a>
       <a id="Coll:Coll"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -101,11 +101,28 @@
         <span class="name">Coll</span><span class="result"> = <a href="DefaultPriorityMap.html" class="extype" name="de.ummels.prioritymap.DefaultPriorityMap">DefaultPriorityMap</a>[_, _]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#de.ummels.prioritymap.DefaultPriorityMap$@Coll=de.ummels.prioritymap.DefaultPriorityMap[_,_]" title="Permalink" target="_top">
+      <a href="../../../index.html#de.ummels.prioritymap.DefaultPriorityMap$@Coll=CC[_,_]" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" />
       </a>
     </span>
-      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="PriorityMapFactory.html" class="extype" name="de.ummels.prioritymap.PriorityMapFactory">PriorityMapFactory</a></dd></dl></div>
+    </li><li name="de.ummels.prioritymap.PriorityMapFactory.PriorityMapCanBuildFrom" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="PriorityMapCanBuildFrom[A,B]extendsCanBuildFrom[PriorityMapFactory.this.Coll,(A,B),CC[A,B]]"></a>
+      <a id="PriorityMapCanBuildFrom[A,B]:PriorityMapCanBuildFrom[A,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="PriorityMapFactory$PriorityMapCanBuildFrom.html"><span class="name">PriorityMapCanBuildFrom</span></a><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.generic.CanBuildFrom" class="extype" target="_top">CanBuildFrom</a>[<a href="PriorityMapFactory.html#Coll=CC[_,_]" class="extmbr" name="de.ummels.prioritymap.PriorityMapFactory.Coll">Coll</a>, (<span class="extype" name="de.ummels.prioritymap.PriorityMapFactory.PriorityMapCanBuildFrom.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMapFactory.PriorityMapCanBuildFrom.B">B</span>), <span class="extype" name="de.ummels.prioritymap.PriorityMapFactory.CC">CC</span>[<span class="extype" name="de.ummels.prioritymap.PriorityMapFactory.PriorityMapCanBuildFrom.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMapFactory.PriorityMapCanBuildFrom.B">B</span>]]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#de.ummels.prioritymap.PriorityMapFactory@PriorityMapCanBuildFrom[A,B]extendsCanBuildFrom[PriorityMapFactory.this.Coll,(A,B),CC[A,B]]" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="PriorityMapFactory.html" class="extype" name="de.ummels.prioritymap.PriorityMapFactory">PriorityMapFactory</a></dd></dl></div>
     </li></ol>
             </div>
 
@@ -164,8 +181,8 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="de.ummels.prioritymap.DefaultPriorityMap#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="apply[A,B](kvs:(A,B)*)(implicitord:Ordering[B]):de.ummels.prioritymap.DefaultPriorityMap[A,B]"></a>
+    </li><li name="de.ummels.prioritymap.PriorityMapFactory#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="apply[A,B](kvs:(A,B)*)(implicitord:Ordering[B]):CC[A,B]"></a>
       <a id="apply[A,B]((A,B)*)(Ordering[B]):DefaultPriorityMap[A,B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -173,16 +190,16 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">apply</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span name="kvs">kvs: (<span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.apply.A">A</span>, <span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.apply.B">B</span>)*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="ord">ord: <span class="extype" name="scala.Ordering">Ordering</span>[<span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.apply.B">B</span>]</span>)</span><span class="result">: <a href="DefaultPriorityMap.html" class="extype" name="de.ummels.prioritymap.DefaultPriorityMap">DefaultPriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.apply.A">A</span>, <span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.apply.B">B</span>]</span>
+        <span class="name">apply</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span name="kvs">kvs: (<span class="extype" name="de.ummels.prioritymap.PriorityMapFactory.apply.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMapFactory.apply.B">B</span>)*</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="ord">ord: <span class="extype" name="scala.Ordering">Ordering</span>[<span class="extype" name="de.ummels.prioritymap.PriorityMapFactory.apply.B">B</span>]</span>)</span><span class="result">: <a href="DefaultPriorityMap.html" class="extype" name="de.ummels.prioritymap.DefaultPriorityMap">DefaultPriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMapFactory.apply.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMapFactory.apply.B">B</span>]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#de.ummels.prioritymap.DefaultPriorityMap$@apply[A,B](kvs:(A,B)*)(implicitord:Ordering[B]):de.ummels.prioritymap.DefaultPriorityMap[A,B]" title="Permalink" target="_top">
+      <a href="../../../index.html#de.ummels.prioritymap.DefaultPriorityMap$@apply[A,B](kvs:(A,B)*)(implicitord:Ordering[B]):CC[A,B]" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" />
       </a>
     </span>
       <p class="shortcomment cmt">A priority map that contains the given key/value bindings.</p><div class="fullcomment"><div class="comment cmt"><p>A priority map that contains the given key/value bindings.
 </p></div><dl class="paramcmts block"><dt class="tparam">A</dt><dd class="cmt"><p>the key type</p></dd><dt class="tparam">B</dt><dd class="cmt"><p>the value type</p></dd><dt class="param">kvs</dt><dd class="cmt"><p>the key/value pairs that make up the map</p></dd><dt class="param">ord</dt><dd class="cmt"><p>the implicit ordering on values</p></dd><dt>returns</dt><dd class="cmt"><p>a new priority map with the given bindings
-</p></dd></dl></div>
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="PriorityMapFactory.html" class="extype" name="de.ummels.prioritymap.PriorityMapFactory">PriorityMapFactory</a></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -209,7 +226,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">canBuildFrom</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="ord">ord: <span class="extype" name="scala.Ordering">Ordering</span>[<span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.canBuildFrom.B">B</span>]</span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.generic.CanBuildFrom" class="extype" target="_top">CanBuildFrom</a>[<a href="#Coll=de.ummels.prioritymap.DefaultPriorityMap[_,_]" class="extmbr" name="de.ummels.prioritymap.DefaultPriorityMap.Coll">Coll</a>, (<span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.canBuildFrom.A">A</span>, <span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.canBuildFrom.B">B</span>), <a href="DefaultPriorityMap.html" class="extype" name="de.ummels.prioritymap.DefaultPriorityMap">DefaultPriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.canBuildFrom.A">A</span>, <span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.canBuildFrom.B">B</span>]]</span>
+        <span class="name">canBuildFrom</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="ord">ord: <span class="extype" name="scala.Ordering">Ordering</span>[<span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.canBuildFrom.B">B</span>]</span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.generic.CanBuildFrom" class="extype" target="_top">CanBuildFrom</a>[<a href="#Coll=CC[_,_]" class="extmbr" name="de.ummels.prioritymap.DefaultPriorityMap.Coll">Coll</a>, (<span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.canBuildFrom.A">A</span>, <span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.canBuildFrom.B">B</span>), <a href="DefaultPriorityMap.html" class="extype" name="de.ummels.prioritymap.DefaultPriorityMap">DefaultPriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.canBuildFrom.A">A</span>, <span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.canBuildFrom.B">B</span>]]</span>
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#de.ummels.prioritymap.DefaultPriorityMap$@canBuildFrom[A,B](implicitord:Ordering[B]):scala.collection.generic.CanBuildFrom[de.ummels.prioritymap.DefaultPriorityMap.Coll,(A,B),de.ummels.prioritymap.DefaultPriorityMap[A,B]]" title="Permalink" target="_top">
@@ -240,7 +257,7 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="de.ummels.prioritymap.DefaultPriorityMap#empty" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+    </li><li name="de.ummels.prioritymap.DefaultPriorityMap#empty" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="empty[A,B](implicitord:Ordering[B]):de.ummels.prioritymap.DefaultPriorityMap[A,B]"></a>
       <a id="empty[A,B](Ordering[B]):DefaultPriorityMap[A,B]"></a>
       <h4 class="signature">
@@ -256,7 +273,7 @@
         <img src="../../../lib/permalink.png" />
       </a>
     </span>
-      <p class="shortcomment cmt">An empty priority map.</p>
+      <p class="shortcomment cmt">An empty priority map.</p><div class="fullcomment"><div class="comment cmt"><p>An empty priority map.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="de.ummels.prioritymap.DefaultPriorityMap">DefaultPriorityMap</a> → <a href="PriorityMapFactory.html" class="extype" name="de.ummels.prioritymap.PriorityMapFactory">PriorityMapFactory</a></dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -314,25 +331,6 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="de.ummels.prioritymap.DefaultPriorityMap#fromMap" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="fromMap[A,B](m:scala.collection.immutable.Map[A,B])(implicitord:Ordering[B]):de.ummels.prioritymap.DefaultPriorityMap[A,B]"></a>
-      <a id="fromMap[A,B](Map[A,B])(Ordering[B]):DefaultPriorityMap[A,B]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">fromMap</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span name="m">m: <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.immutable.Map" class="extype" target="_top">Map</a>[<span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.fromMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.fromMap.B">B</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="ord">ord: <span class="extype" name="scala.Ordering">Ordering</span>[<span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.fromMap.B">B</span>]</span>)</span><span class="result">: <a href="DefaultPriorityMap.html" class="extype" name="de.ummels.prioritymap.DefaultPriorityMap">DefaultPriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.fromMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.fromMap.B">B</span>]</span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#de.ummels.prioritymap.DefaultPriorityMap$@fromMap[A,B](m:scala.collection.immutable.Map[A,B])(implicitord:Ordering[B]):de.ummels.prioritymap.DefaultPriorityMap[A,B]" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">A priority map that contains with the bindings from the given map.</p><div class="fullcomment"><div class="comment cmt"><p>A priority map that contains with the bindings from the given map.
-</p></div><dl class="paramcmts block"><dt class="tparam">A</dt><dd class="cmt"><p>the key type</p></dd><dt class="tparam">B</dt><dd class="cmt"><p>the value type</p></dd><dt class="param">m</dt><dd class="cmt"><p>the map</p></dd><dt class="param">ord</dt><dd class="cmt"><p>the implicit ordering on values</p></dd><dt>returns</dt><dd class="cmt"><p>a new priority map with the bindings form the given map
-</p></dd></dl></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
@@ -401,8 +399,8 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="de.ummels.prioritymap.DefaultPriorityMap#newBuilder" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="newBuilder[A,B](implicitord:Ordering[B]):scala.collection.mutable.Builder[(A,B),de.ummels.prioritymap.DefaultPriorityMap[A,B]]"></a>
+    </li><li name="de.ummels.prioritymap.PriorityMapFactory#newBuilder" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="newBuilder[A,B](implicitord:Ordering[B]):scala.collection.mutable.Builder[(A,B),CC[A,B]]"></a>
       <a id="newBuilder[A,B](Ordering[B]):Builder[(A,B),DefaultPriorityMap[A,B]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -410,14 +408,14 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">newBuilder</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="ord">ord: <span class="extype" name="scala.Ordering">Ordering</span>[<span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.newBuilder.B">B</span>]</span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.mutable.Builder" class="extype" target="_top">Builder</a>[(<span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.newBuilder.A">A</span>, <span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.newBuilder.B">B</span>), <a href="DefaultPriorityMap.html" class="extype" name="de.ummels.prioritymap.DefaultPriorityMap">DefaultPriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.newBuilder.A">A</span>, <span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.newBuilder.B">B</span>]]</span>
+        <span class="name">newBuilder</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span class="implicit">implicit </span><span name="ord">ord: <span class="extype" name="scala.Ordering">Ordering</span>[<span class="extype" name="de.ummels.prioritymap.PriorityMapFactory.newBuilder.B">B</span>]</span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.collection.mutable.Builder" class="extype" target="_top">Builder</a>[(<span class="extype" name="de.ummels.prioritymap.PriorityMapFactory.newBuilder.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMapFactory.newBuilder.B">B</span>), <a href="DefaultPriorityMap.html" class="extype" name="de.ummels.prioritymap.DefaultPriorityMap">DefaultPriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMapFactory.newBuilder.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMapFactory.newBuilder.B">B</span>]]</span>
       </span>
       </h4><span class="permalink">
-      <a href="../../../index.html#de.ummels.prioritymap.DefaultPriorityMap$@newBuilder[A,B](implicitord:Ordering[B]):scala.collection.mutable.Builder[(A,B),de.ummels.prioritymap.DefaultPriorityMap[A,B]]" title="Permalink" target="_top">
+      <a href="../../../index.html#de.ummels.prioritymap.DefaultPriorityMap$@newBuilder[A,B](implicitord:Ordering[B]):scala.collection.mutable.Builder[(A,B),CC[A,B]]" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" />
       </a>
     </span>
-      
+      <p class="shortcomment cmt">The standard builder for priority maps.</p><div class="fullcomment"><div class="comment cmt"><p>The standard builder for priority maps.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="PriorityMapFactory.html" class="extype" name="de.ummels.prioritymap.PriorityMapFactory">PriorityMapFactory</a></dd></dl></div>
     </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
       <a id="notify():Unit"></a>
@@ -568,6 +566,8 @@
               <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.4/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></h3>
             </div><div class="parent" name="java.io.Serializable">
               <h3>Inherited from <span class="extype" name="java.io.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="de.ummels.prioritymap.PriorityMapFactory">
+              <h3>Inherited from <a href="PriorityMapFactory.html" class="extype" name="de.ummels.prioritymap.PriorityMapFactory">PriorityMapFactory</a>[<a href="DefaultPriorityMap.html" class="extype" name="de.ummels.prioritymap.DefaultPriorityMap">DefaultPriorityMap</a>]</h3>
             </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
