@@ -20,6 +20,6 @@ scalacOptions ++= Seq("-Xlint", "-unchecked", "-deprecation", "-feature")
 
 autoAPIMappings := true
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.2" % "test"
+libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.3" % "test"
 
 libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.12.1" % "test"
