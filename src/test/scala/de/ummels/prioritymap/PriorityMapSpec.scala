@@ -168,7 +168,7 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
   }
 
   property("withDefaultValue should use the default function for keys not in the map") {
-    forAll { (m: PriorityMap[Keys, Values], d: Values, key: Keys, other: Keys) =>
+    forAll { (m: PriorityMap[Keys, Values], d: Values, key: Keys) =>
       val m1 = m.withDefaultValue(d)
       m1(key) shouldBe m.getOrElse(key, d)
       (m1 - key)(key) shouldBe d
