@@ -10,6 +10,8 @@ licenses := Seq("ISC License" -> url("http://opensource.org/licenses/ISC"))
 
 homepage := Some(url("https://github.com/ummels/scala-prioritymap"))
 
+apiURL := Some(url("http://ummels.github.io/scala-prioritymap/"))
+
 scalaVersion := "2.11.4"
 
 crossScalaVersions := Seq("2.10.4", "2.11.4")
