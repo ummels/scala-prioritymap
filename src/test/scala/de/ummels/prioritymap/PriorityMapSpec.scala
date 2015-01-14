@@ -22,15 +22,6 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
     }
   }
 
-  property("contained and definedAt should return true/false for keys in/not in the map") {
-    forAll { (m: PriorityMap[Keys, Values], key: Keys, v: Values) =>
-      (m + (key -> v)).contains(key) shouldBe true
-      (m + (key -> v)).isDefinedAt(key) shouldBe true
-      (m - key).contains(key) shouldBe false
-      (m - key).isDefinedAt(key) shouldBe false
-    }
-  }
-
   property("head and tail should match") {
     forAll { (m: PriorityMap[Keys, Values]) =>
       whenever (m.nonEmpty) {
