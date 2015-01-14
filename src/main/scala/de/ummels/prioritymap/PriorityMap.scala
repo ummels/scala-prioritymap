@@ -83,7 +83,7 @@ object PriorityMap extends PriorityMapFactory[PriorityMap] {
     with PriorityMap[A, B]
     with PriorityMapLike[A, B, WithDefault[A, B]] {
 
-    def ordering = underlying.ordering
+    implicit def ordering: Ordering[B] = underlying.ordering
 
     override def empty = new WithDefault(underlying.empty, default)
 
@@ -93,6 +93,9 @@ object PriorityMap extends PriorityMapFactory[PriorityMap] {
 
     def rangeImpl(from: Option[B], until: Option[B]): WithDefault[A, B] =
       new WithDefault(underlying.rangeImpl(from, until), default)
+
+    override def filterKeys(p: A => Boolean): PriorityMap[A, B] =
+      new WithDefault(underlying.filterKeys(p), default)
 
     override def withDefault(d: A => B): PriorityMap[A, B] = new WithDefault(underlying, d)
 
