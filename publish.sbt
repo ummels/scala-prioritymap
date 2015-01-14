@@ -38,3 +38,12 @@ pomExtra := {
     </developer>
   </developers>
 }
+
+val publishSnapshot = taskKey[Unit]("Publishes snapshot artifacts to a repository.")
+
+publishSnapshot := Def.taskDyn {
+  if (isSnapshot.value) Def.task { publish.value }
+  else Def.task {
+    println("Version " + version.value + " is not a snapshot relase.")
+  }
+}.value
