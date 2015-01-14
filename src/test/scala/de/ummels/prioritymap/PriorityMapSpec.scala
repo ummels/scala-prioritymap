@@ -24,18 +24,24 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
 
   property("head and tail should match") {
     forAll { (m: PriorityMap[Keys, Values]) =>
-      whenever (m.nonEmpty) {
+      if (m.nonEmpty) {
         val (h, t) = (m.head, m.tail)
         (h +: t.toSeq) shouldBe m.toSeq
+      } else {
+        an [NoSuchElementException] should be thrownBy m.head
+        an [UnsupportedOperationException] should be thrownBy m.tail
       }
     }
   }
 
   property("last and init should match") {
     forAll { (m: PriorityMap[Keys, Values]) =>
-      whenever (m.nonEmpty) {
+      if (m.nonEmpty) {
         val (l, i) = (m.last, m.init)
         (i.toSeq :+ l) shouldBe m.toSeq
+      } else {
+        an [NoSuchElementException] should be thrownBy m.last
+        an [UnsupportedOperationException] should be thrownBy m.init
       }
     }
   }
