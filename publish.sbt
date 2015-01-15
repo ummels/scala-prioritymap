@@ -44,6 +44,6 @@ val publishSnapshot = taskKey[Unit]("Publishes snapshot artifacts to a repositor
 publishSnapshot := Def.taskDyn {
   if (isSnapshot.value) Def.task { publish.value }
   else Def.task {
-    println("Version " + version.value + " is not a snapshot relase.")
+    println("Version " + version.value + " is not a snapshot release.")
   }
 }.value
