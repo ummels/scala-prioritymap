@@ -11,6 +11,8 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
   type Keys = Int
   type Values = (Int, Int)
 
+  implicit val ord = Ordering.by[(Int, Int), Int](x => x._1)
+
   property("size should return the number of elements") {
     forAll { (m: PriorityMap[Keys, Values]) =>
       m.size shouldBe m.toSeq.size
