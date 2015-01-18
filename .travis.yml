@@ -21,8 +21,7 @@ after_success:
   git config --global user.email "travis@travis-ci.org" &&
   git config --global user.name "Travis CI" &&
   git config --global push.default simple &&
-  sbt makeSite &&
-  sbt ghpagesPushSite > /dev/null
+  sbt makeSite ghpagesPushSite > /dev/null
 env:
   global:
   - secure: eg/nDoGryerr4xT37aojC5M7YsOnWg0nct/8BJZcF4hd2aJh1kqqYEkwOKMHdVnGGdKy0dHK+mwSrefORcJBAzbV3yluQUgDDmFUVHqjsWhSzu12rBtMhmkaqNRvcznd/hHy509k6+RiQ7iFipE9idpEy3axUTTaWsMJPMLdzFg=
