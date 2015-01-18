@@ -41,9 +41,9 @@ final class DefaultPriorityMap[A, B] private(map: Map[A, B], bags: SortedMap[B, 
   def get(key: A): Option[B] = map get key
 
   def iterator: Iterator[(A, B)] = for {
-    (b, bag) <- bags.iterator
+    bag <- bags.valuesIterator
     a <- bag.iterator
-  } yield (a, b)
+  } yield (a, map(a))
 
   def -(key: A): DefaultPriorityMap[A, B] = get(key) match {
     case None => this
@@ -55,11 +55,9 @@ final class DefaultPriorityMap[A, B] private(map: Map[A, B], bags: SortedMap[B, 
   override def size = map.size
 
   override def last = {
-    val greatestVal = bags.lastKey
-    (bags(greatestVal).last, greatestVal)
+    val key = bags.last._2.last
+    (key, map(key))
   }
-
-  override def lastValue = if (bags.nonEmpty) Some(bags.lastKey) else None
 
   override def valueSet = bags.keySet
 
