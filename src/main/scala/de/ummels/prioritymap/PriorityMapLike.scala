@@ -100,7 +100,7 @@ trait PriorityMapLike[A, B, +This <: PriorityMapLike[A, B, This] with PriorityMa
   def from(from: B): This = rangeImpl(Some(from), None)
 
   /** Returns a new priority map of the same type as this priority map that
-    * only contains values smaller than given upper bound.
+    * only contains values smaller than the given upper bound.
     *
     *  @param until the upper-bound (exclusive) on values
     */
