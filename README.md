@@ -67,4 +67,4 @@ scala> m.range(1, 2)
 res4: de.ummels.prioritymap.PriorityMap[Char,Int] = PriorityMap(a -> 1)
 ```
 
-The full API docs are available [here](http://ummels.github.io/scala-prioritymap/#de.ummels.prioritymap.package).
+The full API docs are available [here](http://ummels.github.io/scala-prioritymap/api/current/#de.ummels.prioritymap.package).
