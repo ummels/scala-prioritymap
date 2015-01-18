@@ -3,6 +3,8 @@ package de.ummels.prioritymap
 import org.scalacheck.{Arbitrary, Gen}
 import org.scalatest.{Matchers, PropSpec, prop}
 
+import scala.collection.immutable.SortedSet
+
 /** Spec for immutable priority maps */
 class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
 
@@ -140,10 +142,9 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
     }
   }
 
-  property("valueSet should return the set of value") {
+  property("valueSet should return the set of values") {
     forAll { (m: PriorityMap[Keys, Values]) =>
-      m.valueSet shouldBe m.values.toSet
-      m.valueSet.toSeq shouldBe sorted
+      m.valueSet shouldBe SortedSet.empty ++ m.values
     }
   }
 
