@@ -146,7 +146,7 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
 
   property("valueSet should return the set of values") {
     forAll { (m: PriorityMap[Keys, Values]) =>
-      m.valueSet shouldBe SortedSet.empty ++ m.values
+      m.valueSet shouldBe (SortedSet.empty ++ m.values)
     }
   }
 
