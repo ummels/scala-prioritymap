@@ -1,10 +1,16 @@
 site.settings
 
-site.includeScaladoc("")
+site.includeScaladoc("api/current")
 
 ghpages.settings
 
-git.remoteRepo := "git@github.com:ummels/scala-prioritymap.git"
+git.remoteRepo := {
+  val repo = "ummels/scala-prioritymap.git"
+  sys.env.get("GITHUB_TOKEN") match {
+    case None => "git@github.com:" + repo
+    case Some(token) => "https://" + token + "@github.com/" + repo
+  }
+}
 
 publishTo := {
   val nexus = "https://oss.sonatype.org/"

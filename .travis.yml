@@ -9,10 +9,17 @@ jdk:
 - openjdk7
 after_success:
 - |
-  test $TRAVIS_PULL_REQUEST == "false" &&
-  test $TRAVIS_BRANCH == "master" &&
-  test $TRAVIS_JDK_VERSION = "oraclejdk8" &&
+  [[ $TRAVIS_PULL_REQUEST = false ]] &&
+  [[ $TRAVIS_BRANCH = master ]] &&
+  [[ $TRAVIS_JDK_VERSION = oraclejdk8 ]] &&
   sbt ++$TRAVIS_SCALA_VERSION publishSnapshot
+- |
+  [[ $TRAVIS_PULL_REQUEST = false ]] &&
+  [[ $TRAVIS_BRANCH = master ]] &&
+  [[ $TRAVIS_JDK_VERSION = oraclejdk8 ]] &&
+  [[ $TRAVIS_SCALA_VERSION = 2.11.* ]] &&
+  sbt makeSite ghpagesPushSite
 env:
   global:
   - secure: eg/nDoGryerr4xT37aojC5M7YsOnWg0nct/8BJZcF4hd2aJh1kqqYEkwOKMHdVnGGdKy0dHK+mwSrefORcJBAzbV3yluQUgDDmFUVHqjsWhSzu12rBtMhmkaqNRvcznd/hHy509k6+RiQ7iFipE9idpEy3axUTTaWsMJPMLdzFg=
+  - secure: ozVqKEb9yqS+GdzcmBPx8wmQ7PSMdf9pPNHWAlL8GBLjXA9fgVTR/oJC5iKp+ktU5kU89dz2gWVtLuaSdJbMWtW1dmGH9ud+orZDc9FwMRtetQI3AUGCZDd8RWMb3flR59j27koWf5PSULwb8OvwH2EPzTQavahfVICusDzcyGE=
