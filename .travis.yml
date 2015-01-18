@@ -18,6 +18,8 @@ after_success:
   [[ $TRAVIS_BRANCH = master ]] &&
   [[ $TRAVIS_JDK_VERSION = oraclejdk8 ]] &&
   [[ $TRAVIS_SCALA_VERSION = 2.11.* ]] &&
+  git config --global user.email "travis@travis-ci.org" &&
+  git config --global user.name "Travis CI" &&
   sbt makeSite ghpagesPushSite
 env:
   global:
