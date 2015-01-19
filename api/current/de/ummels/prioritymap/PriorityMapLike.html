@@ -51,7 +51,8 @@
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A template trait for immutable priority maps.
 To create a concrete priority map, you need to implement the following methods
-in addition to those of <code>MapLike</code>:</p><pre><span class="kw">def</span> +(kv: (A, B): This
+in addition to those of <code>MapLike</code>:</p><pre><span class="kw">implicit</span> <span class="kw">def</span> ordering: Ordering[B]
+<span class="kw">def</span> +(kv: (A, B)): This
 <span class="kw">def</span> rangeImpl(from: <span class="std">Option</span>[B], until: <span class="std">Option</span>[B]): This</pre><p>The iterator returned by <code>iterator</code> should generate key/value pairs in the
 order specified by the implicit ordering on values.</p><p>Concrete classes may also override other methods for efficiency.
 </p></div><dl class="attributes block"> <dt>Self Type</dt><dd><a href="" class="extype" name="de.ummels.prioritymap.PriorityMapLike">PriorityMapLike</a>[<span class="extype" name="de.ummels.prioritymap.PriorityMapLike.A">A</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMapLike.B">B</span>, <span class="extype" name="de.ummels.prioritymap.PriorityMapLike.This">This</span>]</dd></dl><div class="toggleContainer block">

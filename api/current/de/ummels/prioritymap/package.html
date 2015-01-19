@@ -143,13 +143,13 @@ res5: de.ummels.prioritymap.PriorityMap[<span class="std">Char</span>,<span clas
       </a>
     </span>
       <p class="shortcomment cmt">A generic trait for immutable priority maps.</p><div class="fullcomment"><div class="comment cmt"><p>A generic trait for immutable priority maps. Concrete classes have to provide
-functionality for the abstract methods in <code>PriorityMap</code>:</p><pre><span class="kw">def</span> get(key: A): <span class="std">Option</span>[B]
+functionality for the abstract methods in <code>PriorityMap</code>:</p><pre><span class="kw">implicit</span> <span class="kw">def</span> ordering: Ordering[B]
+<span class="kw">def</span> get(key: A): <span class="std">Option</span>[B]
 <span class="kw">def</span> iterator: Iterator[(A, B)]
-<span class="kw">def</span> +(kv: (A, B): PriorityMap[A, B]
+<span class="kw">def</span> +(kv: (A, B)): PriorityMap[A, B]
 <span class="kw">def</span> +[B1 <span class="kw">&gt;:</span> B](kv: (A, B1)): <span class="std">Map</span>[A, B1]
 <span class="kw">def</span> -(key: A): PriorityMap[A, B]
-<span class="kw">def</span> rangeImpl(from: <span class="std">Option</span>[B], until: <span class="std">Option</span>[B]): PriorityMap[A, B]
-<span class="kw">implicit</span> <span class="kw">def</span> ordering: Ordering[B]</pre><p>The iterator returned by <code>iterator</code> should generate key/value pairs in the
+<span class="kw">def</span> rangeImpl(from: <span class="std">Option</span>[B], until: <span class="std">Option</span>[B]): PriorityMap[A, B]</pre><p>The iterator returned by <code>iterator</code> should generate key/value pairs in the
 order specified by the implicit ordering on values.</p><p>Concrete classes may also override other methods for efficiency.
 </p></div></div>
     </li><li name="de.ummels.prioritymap.PriorityMapBuilder" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
@@ -205,7 +205,8 @@ to add new elements to an empty priority map.</p>
     </span>
       <p class="shortcomment cmt">A template trait for immutable priority maps.</p><div class="fullcomment"><div class="comment cmt"><p>A template trait for immutable priority maps.
 To create a concrete priority map, you need to implement the following methods
-in addition to those of <code>MapLike</code>:</p><pre><span class="kw">def</span> +(kv: (A, B): This
+in addition to those of <code>MapLike</code>:</p><pre><span class="kw">implicit</span> <span class="kw">def</span> ordering: Ordering[B]
+<span class="kw">def</span> +(kv: (A, B)): This
 <span class="kw">def</span> rangeImpl(from: <span class="std">Option</span>[B], until: <span class="std">Option</span>[B]): This</pre><p>The iterator returned by <code>iterator</code> should generate key/value pairs in the
 order specified by the implicit ordering on values.</p><p>Concrete classes may also override other methods for efficiency.
 </p></div></div>

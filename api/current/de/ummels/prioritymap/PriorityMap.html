@@ -52,13 +52,13 @@
       </h4>
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A generic trait for immutable priority maps. Concrete classes have to provide
-functionality for the abstract methods in <code>PriorityMap</code>:</p><pre><span class="kw">def</span> get(key: A): <span class="std">Option</span>[B]
+functionality for the abstract methods in <code>PriorityMap</code>:</p><pre><span class="kw">implicit</span> <span class="kw">def</span> ordering: Ordering[B]
+<span class="kw">def</span> get(key: A): <span class="std">Option</span>[B]
 <span class="kw">def</span> iterator: Iterator[(A, B)]
-<span class="kw">def</span> +(kv: (A, B): PriorityMap[A, B]
+<span class="kw">def</span> +(kv: (A, B)): PriorityMap[A, B]
 <span class="kw">def</span> +[B1 <span class="kw">&gt;:</span> B](kv: (A, B1)): <span class="std">Map</span>[A, B1]
 <span class="kw">def</span> -(key: A): PriorityMap[A, B]
-<span class="kw">def</span> rangeImpl(from: <span class="std">Option</span>[B], until: <span class="std">Option</span>[B]): PriorityMap[A, B]
-<span class="kw">implicit</span> <span class="kw">def</span> ordering: Ordering[B]</pre><p>The iterator returned by <code>iterator</code> should generate key/value pairs in the
+<span class="kw">def</span> rangeImpl(from: <span class="std">Option</span>[B], until: <span class="std">Option</span>[B]): PriorityMap[A, B]</pre><p>The iterator returned by <code>iterator</code> should generate key/value pairs in the
 order specified by the implicit ordering on values.</p><p>Concrete classes may also override other methods for efficiency.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
