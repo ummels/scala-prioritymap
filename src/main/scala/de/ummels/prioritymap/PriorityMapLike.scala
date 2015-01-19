@@ -8,7 +8,8 @@ import scala.collection.immutable._
   * in addition to those of `MapLike`:
   *
   * {{{
-  * def +(kv: (A, B): This
+  * implicit def ordering: Ordering[B]
+  * def +(kv: (A, B)): This
   * def rangeImpl(from: Option[B], until: Option[B]): This
   * }}}
   *
