@@ -1,9 +1,9 @@
 <!DOCTYPE html >
 <html>
         <head>
-          <title>ummels - de.ummels</title>
-          <meta name="description" content="ummels - de.ummels" />
-          <meta name="keywords" content="ummels de.ummels" />
+          <title>ummels - scala-prioritymap - de.ummels</title>
+          <meta name="description" content="ummels - scala - prioritymap - de.ummels" />
+          <meta name="keywords" content="ummels scala prioritymap de.ummels" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -70,7 +70,7 @@
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="de.ummels.prioritymap" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+              <ol><li name="de.ummels.prioritymap" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="prioritymap"></a>
       <a id="prioritymap:prioritymap"></a>
       <h4 class="signature">
@@ -86,27 +86,7 @@
         <img src="../../lib/permalink.png" />
       </a>
     </span>
-      <p class="shortcomment cmt">Provides an implementation of immutable priority maps, i.e.</p><div class="fullcomment"><div class="comment cmt"><p>Provides an implementation of immutable priority maps, i.e. immutable maps that return their entries sorted
-by value.</p><h4>Overview</h4><p>Priority maps are similar to sorted maps, but while for sorted maps <code>iterator</code> returns an iterator that
-produces entries sorted by their keys, calling <code>iterator</code> on a priority map returns an iterator that
-produces entries sorted by their <i>values</i>. Priority maps also offer several <code>range</code> methods, which
-return a submap with values inside a given range.</p><p>Since calling <code>head</code> on a priority map returns a key-value pair with minimal value, priority
-maps can also be thought of as a more versatile variant of <i>priority queues</i>.</p><h4>Usage</h4><p>The easiest way to instantiate a new priority map is to use the <code>apply</code> method in the
-<a href="prioritymap/PriorityMap.html" class="extype" name="de.ummels.prioritymap.PriorityMap">de.ummels.prioritymap.PriorityMap</a> companion object.</p><pre>scala&gt; <span class="kw">val</span> m = PriorityMap(<span class="lit">'a'</span> -&gt; <span class="num">1</span>, <span class="lit">'b'</span> -&gt; <span class="num">2</span>, <span class="lit">'c'</span> -&gt; <span class="num">0</span>)
-m: de.ummels.prioritymap.PriorityMap[<span class="std">Char</span>,<span class="std">Int</span>] = PriorityMap(c -&gt; <span class="num">0</span>, a -&gt; <span class="num">1</span>, b -&gt; <span class="num">2</span>)</pre><p>Since priority maps are immutable, updating a key/value pair returns a new map and does
-not modify the old map.</p><pre>scala&gt; m + (<span class="lit">'b'</span> -&gt; -<span class="num">1</span>)
-res1: de.ummels.prioritymap.PriorityMap[<span class="std">Char</span>,<span class="std">Int</span>] = PriorityMap(b -&gt; -<span class="num">1</span>, c -&gt; <span class="num">0</span>, a -&gt; <span class="num">1</span>)
-
-scala&gt; m
-res2: de.ummels.prioritymap.PriorityMap[<span class="std">Char</span>,<span class="std">Int</span>] = PriorityMap(c -&gt; <span class="num">0</span>, a -&gt; <span class="num">1</span>, b -&gt; <span class="num">2</span>)</pre><p>In addition to the methods available for maps, priority maps offer methods for obtaining
-a submap whose values lie inside a given range.</p><pre>scala&gt; m.from(<span class="num">1</span>)
-res3: de.ummels.prioritymap.PriorityMap[<span class="std">Char</span>,<span class="std">Int</span>] = PriorityMap(a -&gt; <span class="num">1</span>, b -&gt; <span class="num">2</span>)
-
-scala&gt; m.until(<span class="num">2</span>)
-res4: de.ummels.prioritymap.PriorityMap[<span class="std">Char</span>,<span class="std">Int</span>] = PriorityMap(c -&gt; <span class="num">0</span>, a -&gt; <span class="num">1</span>)
-
-scala&gt; m.range(<span class="num">1</span>, <span class="num">2</span>)
-res5: de.ummels.prioritymap.PriorityMap[<span class="std">Char</span>,<span class="std">Int</span>] = PriorityMap(a -&gt; <span class="num">1</span>)</pre></div></div>
+      
     </li></ol>
             </div>
 
@@ -131,7 +111,7 @@ res5: de.ummels.prioritymap.PriorityMap[<span class="std">Char</span>,<span clas
 
       <div id="tooltip"></div>
 
-      <div id="footer">  </div>
+      <div id="footer"> scala-prioritymap 0.3.0-SNAPSHOT API documentation. © 2014-2015 Michael Ummels </div>
 
 
     </body>
