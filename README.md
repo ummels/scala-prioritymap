@@ -1,5 +1,4 @@
-Immutable priority maps for Scala
-=================================
+# Immutable priority maps for Scala
 
 [![Build Status](https://travis-ci.org/ummels/scala-prioritymap.svg?branch=master)](https://travis-ci.org/ummels/scala-prioritymap)
 
@@ -14,8 +13,7 @@ maps can also be thought of as a more versatile variant of *priority queues*.
 This implementation of priority maps has been inspired by
 [Mark Engelberg's implentation for Clojure](https://github.com/clojure/data.priority-map).
 
-Setup
------
+## Setup
 
 The latest version is `0.2.0` and supports Scala 2.10 and 2.11.
 
@@ -28,8 +26,7 @@ libraryDependencies += "de.ummels" %% "scala-prioritymap" % "0.2.0"
 
 See the [release notes](RELEASE.md) if you upgrade from an earlier release.
 
-Usage
------
+## Usage
 
 The easiest way to instantiate a new priority map is to use the `apply` method in the
 PriorityMap companion object.
