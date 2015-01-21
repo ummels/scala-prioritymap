@@ -2,11 +2,11 @@
 
 #### Version 0.3.0 (unreleased)
 
-- Fixed behavior of default implementation for orderings which are not partial orders.
+- Fixed behavior of default implementation for custom orderings.
 - Fixed preservation of default function after calling `withDefault` or `withDefaultValue`.
 - Added builder and factory classes.
-- Removed fromMap method from companion objects.
-- Mader inner class PriorityMap.WithDefault private.
+- Removed `fromMap` method from companion objects.
+- Mader inner class `PriorityMap.WithDefault` private.
 
 #### Version 0.2.0 (06 Jan 2015)
 
