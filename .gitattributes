@@ -1,0 +1,2 @@
+src/site/api/*/* linguist-vendored
+src/site/api/*/lib/* linguist-vendored
