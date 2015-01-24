@@ -1,6 +1,6 @@
 # Release Notes
 
-#### Version 0.3.0 (unreleased)
+#### Version 0.3.0 (24 Jan 2015)
 
 - Fixed behavior of default implementation for custom orderings.
 - Fixed preservation of default function after calling `withDefault` or `withDefaultValue`.
