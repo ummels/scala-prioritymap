@@ -42,7 +42,7 @@ apiURL := {
   if (isSnapshot.value)
     None
   else
-    Some(url("http://ummels.github.io/scala-prioritymap/api/" + version.value))
+    Some(url("https://ummels.github.io/scala-prioritymap/api/" + version.value))
 }
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.3" % "test"
