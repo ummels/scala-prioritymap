@@ -15,7 +15,7 @@ This implementation of priority maps has been inspired by
 
 ## Setup
 
-The latest version is `0.3.0` and supports Scala 2.10 and 2.11.
+The latest version is 0.3.0 and supports Scala 2.10 and 2.11.
 
 Releases are available from [Maven Central](http://search.maven.org/#search|ga|1|scala-prioritymap).
 If you use [sbt](http://www.scala-sbt.org/), simply add the following dependency to your build file:
