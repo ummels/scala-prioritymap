@@ -7,17 +7,15 @@ jdk:
 - oraclejdk8
 - oraclejdk7
 - openjdk7
+script: sbt clean coverage test
 after_success:
 - |
   [[ $TRAVIS_PULL_REQUEST = false ]] &&
   [[ $TRAVIS_BRANCH = master ]] &&
   [[ $TRAVIS_JDK_VERSION = oraclejdk8 ]] &&
-  sbt ++$TRAVIS_SCALA_VERSION publishSnapshot
-- |
-  [[ $TRAVIS_PULL_REQUEST = false ]] &&
-  [[ $TRAVIS_BRANCH = master ]] &&
-  [[ $TRAVIS_JDK_VERSION = oraclejdk8 ]] &&
+  sbt ++$TRAVIS_SCALA_VERSION publishSnapshot &&
   [[ $TRAVIS_SCALA_VERSION = 2.11.* ]] &&
+  sbt coveralls &&
   git config --global user.email "travis@travis-ci.org" &&
   git config --global user.name "Travis CI" &&
   git config --global push.default simple &&
@@ -26,3 +24,4 @@ env:
   global:
   - secure: eg/nDoGryerr4xT37aojC5M7YsOnWg0nct/8BJZcF4hd2aJh1kqqYEkwOKMHdVnGGdKy0dHK+mwSrefORcJBAzbV3yluQUgDDmFUVHqjsWhSzu12rBtMhmkaqNRvcznd/hHy509k6+RiQ7iFipE9idpEy3axUTTaWsMJPMLdzFg=
   - secure: qB5SyBNN9sXGBNdR2k5eTAykrEVEn/2CCi0Cx2Banli1S/+eYuytqTsxF2umhCe8pd+xn+IlfEresivSTQeXlaxGefU0Pd9Wq7a//Ha8qcHTQZ2YbISeAaNjAvy6WNf25rydLAYzW86CRTQJN4lswvAqkHvYyVuKPcyoxmwpDNw=
+  - secure: WI8QIuV5k99SB0K6nT2AffO2dAbvfMlTNQEKFMmet8pmwiL1l4yUjlangJAaFEkKruPCoq+K9e1RzJ8bzMUwdbpc0ZDI0+p6Urn7DbCQBf4Ic4yNIhmDPrx0zmg2vI8uqHfvDCM87mdsJZjFHsu7ObHU68INJ5Y+O+eFtmWbg2g=
