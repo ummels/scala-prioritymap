@@ -57,24 +57,33 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
     }
   }
 
-  property("++ should add and replace elements") {
+  property("++ should add elements") {
     forAll(for {
       m <- genPriorityMap
       i <- Gen.choose(0, m.size)
     } yield (m, i)) { case (m, i) =>
       val kvs = m.toSeq
       val (xs1, xs2) = kvs.splitAt(i)
-      val xs = xs2 ++ xs1
-      (m.empty ++ xs) shouldBe m
-      (m ++ xs) shouldBe m
+      m.empty ++ kvs shouldBe m
+      m.empty ++ (xs2 ++ xs1) shouldBe m
+      (m.empty ++ xs2) ++ xs1 shouldBe m
     }
   }
 
-  property("+ should behave like ++ for sequences") {
+  property("+ should behave like ++") {
     forAll(genPriorityMap, genKeyValue, Gen.listOf(genKeyValue)) { (m, kv, kvs) =>
       m + kv shouldBe m ++ Seq(kv)
       (m /: kvs)(_ + _) shouldBe m ++ kvs
       m + (kv, kv, kvs:_*) shouldBe m ++ (kv :: kvs)
+    }
+  }
+
+  property("+ should add or replace entries") {
+    forAll(genPriorityMap, genKey, genValue) { (m, k, v) =>
+      (m + (k -> v))(k) shouldBe v
+    }
+    forAll(genPriorityMap, genKey, genValue) { (m, k, v) =>
+      (m + (k -> v._1))(k) shouldBe v._1
     }
   }
 
