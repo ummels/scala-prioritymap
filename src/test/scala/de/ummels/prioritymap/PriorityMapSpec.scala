@@ -10,6 +10,12 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
 
   import PriorityMapSpec._
 
+  property("apply should add elements to an empty priority map") {
+    forAll(Gen.oneOf(ord1, ord2), Gen.listOf(genKeyValue)) { (ord, kvs) =>
+      PriorityMap.apply(kvs:_*)(ord) shouldBe PriorityMap.empty(ord) ++ kvs
+    }
+  }
+
   property("size should return the number of elements") {
     forAll(genPriorityMap) { m =>
       m.size shouldBe m.toSeq.size
@@ -51,7 +57,7 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
     }
   }
 
-  property("+ and ++ should add and replace elements") {
+  property("++ should add and replace elements") {
     forAll(for {
       m <- genPriorityMap
       i <- Gen.choose(0, m.size)
@@ -59,10 +65,16 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
       val kvs = m.toSeq
       val (xs1, xs2) = kvs.splitAt(i)
       val xs = xs2 ++ xs1
-      (m.empty /: xs)(_ + _) shouldBe m
       (m.empty ++ xs) shouldBe m
-      (m /: xs)(_ + _) shouldBe m
       (m ++ xs) shouldBe m
+    }
+  }
+
+  property("+ should behave like ++ for sequences") {
+    forAll(genPriorityMap, genKeyValue, Gen.listOf(genKeyValue)) { (m, kv, kvs) =>
+      m + kv shouldBe m ++ Seq(kv)
+      (m /: kvs)(_ + _) shouldBe m ++ kvs
+      m + (kv, kv, kvs:_*) shouldBe m ++ (kv :: kvs)
     }
   }
 
@@ -210,10 +222,12 @@ object PriorityMapSpec {
 
   def genValue: Gen[Values] = Arbitrary.arbitrary[Values]
 
+  def genKeyValue: Gen[(Keys, Values)] = Gen.zip(genKey, genValue)
+
   def genPriorityMap: Gen[PriorityMap[Keys, Values]] = for {
     ord <- Gen.oneOf(ord1, ord2)
-    elems <- Gen.listOf(Gen.zip(genKey, genValue))
-    m = PriorityMap.empty(ord) ++ elems
+    kvs <- Gen.listOf(genKeyValue)
+    m = PriorityMap.empty(ord) ++ kvs
     default <- Arbitrary.arbitrary[Option[Values]]
     pred <- Arbitrary.arbitrary[Option[Keys => Boolean]]
   } yield (default, pred) match {
