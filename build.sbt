@@ -45,6 +45,6 @@ apiURL := {
     Some(url("https://ummels.github.io/scala-prioritymap/api/" + version.value))
 }
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.3" % "test"
+libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.4" % "test"
 
 libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.12.1" % "test"
