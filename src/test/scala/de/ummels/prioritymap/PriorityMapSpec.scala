@@ -1,5 +1,6 @@
 package de.ummels.prioritymap
 
+import scala.collection.breakOut
 import org.scalacheck.{Arbitrary, Gen}
 import org.scalatest.{Inspectors, Matchers, PropSpec, prop}
 
@@ -221,6 +222,13 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
   property("par should return an equivalent map") {
     forAll(genPriorityMap) { m =>
       m.par shouldBe m
+    }
+  }
+
+  property("breakOut should be able to yield a builder for priority maps") {
+    forAll(Gen.listOf(genKey)) { keys =>
+      val m: PriorityMap[Keys, Values] = keys.map(k => k -> (k -> k))(breakOut)
+      m.keys.toSet shouldBe keys.toSet
     }
   }
 }
