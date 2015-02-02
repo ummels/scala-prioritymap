@@ -11,9 +11,10 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
 
   import PriorityMapSpec._
 
-  property("apply should add elements to an empty priority map") {
+  property("apply should create a priority map with the given entries") {
     forAll(Gen.oneOf(ord1, ord2), Gen.listOf(genKeyValue)) { (ord, kvs) =>
-      PriorityMap.apply(kvs:_*)(ord) shouldBe PriorityMap.empty(ord) ++ kvs
+      PriorityMap(kvs:_*)(ord) shouldBe Map(kvs:_*)
+      DefaultPriorityMap(kvs:_*)(ord) shouldBe Map(kvs:_*)
     }
   }
 
@@ -227,8 +228,10 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
 
   property("breakOut should be able to yield a builder for priority maps") {
     forAll(Gen.listOf(genKey)) { keys =>
-      val m: PriorityMap[Keys, Values] = keys.map(k => k -> (k -> k))(breakOut)
-      m.keys.toSet shouldBe keys.toSet
+      val m1: PriorityMap[Keys, Keys] = keys.map(k => k -> k)(breakOut)
+      m1.keys.toSet shouldBe keys.toSet
+      val m2: DefaultPriorityMap[Keys, Keys] = keys.map(k => k -> k)(breakOut)
+      m2.keys.toSet shouldBe keys.toSet
     }
   }
 }
