@@ -217,6 +217,12 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
       })(key) shouldBe d
     }
   }
+
+  property("par should return an equivalent map") {
+    forAll(genPriorityMap) { m =>
+      m.par shouldBe m
+    }
+  }
 }
 
 object PriorityMapSpec {
