@@ -47,4 +47,4 @@ apiURL := {
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.4" % "test"
 
-libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.12.1" % "test"
+libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.12.2" % "test"
