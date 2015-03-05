@@ -10,9 +10,9 @@ licenses := Seq("ISC License" -> url("http://opensource.org/licenses/ISC"))
 
 homepage := Some(url("https://github.com/ummels/scala-prioritymap"))
 
-scalaVersion := "2.11.5"
+scalaVersion := "2.11.6"
 
-crossScalaVersions := Seq("2.10.4", "2.11.5")
+crossScalaVersions := Seq("2.10.5", "2.11.6")
 
 scalacOptions ++= Seq("-Xlint", "-unchecked", "-deprecation", "-feature")
 
