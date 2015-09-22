@@ -69,8 +69,9 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
 
   property("+ should add or replace entries") {
     forAll(genPriorityMap, genKey, genValue) { (m, k, v) =>
-      (m + (k -> v))(k) shouldBe v
-      (m + (k -> v)) - k shouldBe m - k
+      val m1 = m + (k -> v)
+      m1(k) shouldBe v
+      m1 - k shouldBe m - k
     }
   }
 
@@ -161,7 +162,7 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
 
   property("valueSet should return the set of values") {
     forAll(genPriorityMap) { m =>
-      m.valueSet shouldBe (SortedSet.empty(m.ordering) ++ m.values)
+      m.valueSet shouldBe SortedSet.empty(m.ordering) ++ m.values
       m.valueSet.ordering shouldBe m.ordering
     }
   }
