@@ -13,8 +13,8 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
 
   property("apply should create a priority map with the given entries") {
     forAll(Gen.oneOf(ord1, ord2), Gen.listOf(genKeyValue)) { (ord, kvs) =>
-      PriorityMap(kvs:_*)(ord) shouldBe Map(kvs:_*)
-      DefaultPriorityMap(kvs:_*)(ord) shouldBe Map(kvs:_*)
+      PriorityMap(kvs:_*)(ord) shouldEqual Map(kvs:_*)
+      DefaultPriorityMap(kvs:_*)(ord) shouldEqual Map(kvs:_*)
     }
   }
 
@@ -41,8 +41,8 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
         val (h, t) = (m.head, m.tail)
         (h +: t.toSeq) shouldBe m.toSeq
       } else {
-        an[NoSuchElementException] should be thrownBy m.head
-        an[UnsupportedOperationException] should be thrownBy m.tail
+        an [NoSuchElementException] should be thrownBy m.head
+        an [UnsupportedOperationException] should be thrownBy m.tail
       }
     }
   }
@@ -53,22 +53,9 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
         val (l, i) = (m.last, m.init)
         (i.toSeq :+ l) shouldBe m.toSeq
       } else {
-        an[NoSuchElementException] should be thrownBy m.last
-        an[UnsupportedOperationException] should be thrownBy m.init
+        an [NoSuchElementException] should be thrownBy m.last
+        an [UnsupportedOperationException] should be thrownBy m.init
       }
-    }
-  }
-
-  property("++ should add elements") {
-    forAll(for {
-      m <- genPriorityMap
-      i <- Gen.choose(0, m.size)
-    } yield (m, i)) { case (m, i) =>
-      val kvs = m.toSeq
-      val (xs1, xs2) = kvs.splitAt(i)
-      m.empty ++ kvs shouldBe m
-      m.empty ++ (xs2 ++ xs1) shouldBe m
-      (m.empty ++ xs2) ++ xs1 shouldBe m
     }
   }
 
@@ -83,9 +70,13 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
   property("+ should add or replace entries") {
     forAll(genPriorityMap, genKey, genValue) { (m, k, v) =>
       (m + (k -> v))(k) shouldBe v
+      (m + (k -> v)) - k shouldBe m - k
     }
+  }
+
+  property("+ should fall back to Map's + for other value types") {
     forAll(genPriorityMap, genKey, genValue) { (m, k, v) =>
-      (m + (k -> v._1))(k) shouldBe v._1
+      m + (k -> v._1) shouldBe Map(m.toSeq:_*) + (k -> v._1)
     }
   }
 
@@ -105,8 +96,8 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
       val kvs = keys zip vals
       val m1 = (m merged kvs)(f)
       val all = m.toSeq ++ kvs
-      val m2 = all groupBy (_._1) mapValues (xs => xs map (_._2) reduceLeft f)
-      m1 shouldBe m2
+      val m2 = all groupBy (_._1) mapValues (kvs => kvs map (_._2) reduceLeft f)
+      m1 shouldEqual m2
     }
   }
 
@@ -130,7 +121,7 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
       s <- Gen.choose(0, m.size)
       p <- Gen.containerOfN[Set, Keys](s, Gen.oneOf(m.keys.toSeq))
     } yield (m, p)) { case (m, p) =>
-      m.filterKeys(p) shouldBe m.filter { case (k, _) => p(k)}
+      m.filterKeys(p) shouldBe m.filter { case (k, _) => p(k) }
     }
   }
 
@@ -140,7 +131,7 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
       vals <- Gen.listOfN(m.size, Arbitrary.arbitrary[Int])
       f = Map.empty[Values, Int] ++ (m.values zip vals)
     } yield (m, f)) { case (m, f) =>
-      m.mapValues(f) shouldBe m.map { case (k, v) => (k, f(v))}
+      m.mapValues(f) shouldBe m.map { case (k, v) => (k, f(v)) }
     }
   }
 
@@ -171,25 +162,26 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
   property("valueSet should return the set of values") {
     forAll(genPriorityMap) { m =>
       m.valueSet shouldBe (SortedSet.empty(m.ordering) ++ m.values)
+      m.valueSet.ordering shouldBe m.ordering
     }
   }
 
   property("range should filter out entries with values outside the given bounds") {
     forAll(genPriorityMap, genValue, genValue) { (m, from, until) =>
       val ord = m.ordering
-      m.range(from, until) shouldBe m.filter { case (_, v) => ord.lteq(from, v) && ord.lt(v, until)}
+      m.range(from, until) shouldBe m.filter { case (_, v) => ord.lteq(from, v) && ord.lt(v, until) }
     }
   }
 
   property("from should filter out entries with small values") {
     forAll(genPriorityMap, genValue) { (m, from) =>
-      m.from(from) shouldBe m.filter { case (_, v) => m.ordering.lteq(from, v)}
+      m.from(from) shouldBe m.filter { case (_, v) => m.ordering.lteq(from, v) }
     }
   }
 
   property("until should filter out entries with big values") {
     forAll(genPriorityMap, genValue) { (m, until) =>
-      m.until(until) shouldBe m.filter { case (_, v) => m.ordering.lt(v, until)}
+      m.until(until) shouldBe m.filter { case (_, v) => m.ordering.lt(v, until) }
     }
   }
 
@@ -200,10 +192,7 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
       m1(key) shouldBe m.getOrElse(key, d(key))
       (m1 - key)(key) shouldBe d(key)
       m1.empty(key) shouldBe d(key)
-      (m1 filter { case (k, _) => k != key})(key) shouldBe d(key)
-      (m1 filterKeys {
-        _ != key
-      })(key) shouldBe d(key)
+      m1.filterKeys(_ != key)(key) shouldBe d(key)
     }
   }
 
@@ -213,16 +202,13 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
       m1(key) shouldBe m.getOrElse(key, d)
       (m1 - key)(key) shouldBe d
       m1.empty(key) shouldBe d
-      (m1 filter { case (k, _) => k != key})(key) shouldBe d
-      (m1 filterKeys {
-        _ != key
-      })(key) shouldBe d
+      m1.filterKeys(_ != key)(key) shouldBe d
     }
   }
 
   property("par should return an equivalent map") {
     forAll(genPriorityMap) { m =>
-      m.par shouldBe m
+      m.par shouldEqual m
     }
   }
 
