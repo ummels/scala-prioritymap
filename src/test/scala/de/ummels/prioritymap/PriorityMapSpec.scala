@@ -162,8 +162,10 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
 
   property("valueSet should return the set of values") {
     forAll(genPriorityMap) { m =>
-      m.valueSet shouldBe SortedSet.empty(m.ordering) ++ m.values
-      m.valueSet.ordering shouldBe m.ordering
+      val s = m.valueSet
+      val ord = m.ordering
+      s shouldBe SortedSet.empty(ord) ++ m.values
+      s.ordering shouldBe ord
     }
   }
 
@@ -231,9 +233,9 @@ object PriorityMapSpec {
   val ord1 = Ordering.Tuple2(Ordering.Int, Ordering.Int)
   val ord2 = Ordering.by[(Int, Int), Int](x => x._1)
 
-  def genKey: Gen[Keys] = Arbitrary.arbitrary[Keys]
+  def genKey: Gen[Keys] = Gen.choose(-10, 10)
 
-  def genValue: Gen[Values] = Arbitrary.arbitrary[Values]
+  def genValue: Gen[Values] = Gen.zip(genKey, genKey)
 
   def genKeyValue: Gen[(Keys, Values)] = Gen.zip(genKey, genValue)
 
