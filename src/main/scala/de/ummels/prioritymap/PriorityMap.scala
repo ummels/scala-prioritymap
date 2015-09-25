@@ -26,7 +26,7 @@ trait PriorityMap[A, B] extends Map[A, B] with PriorityMapLike[A, B, PriorityMap
   import PriorityMap._
 
   /** An empty priority map of the same type as this priority map. */
-  override def empty = PriorityMap.empty
+  override def empty: PriorityMap[A, B] = PriorityMap.empty
 
   override def seq: PriorityMap[A, B] = this
 
@@ -51,7 +51,7 @@ trait PriorityMap[A, B] extends Map[A, B] with PriorityMapLike[A, B, PriorityMap
   def withDefaultValue(d: B): PriorityMap[A, B] = new WithDefault(this, x => d)
 
   // $COVERAGE-OFF$
-  override def stringPrefix = "PriorityMap"
+  override def stringPrefix: String = "PriorityMap"
   // $COVERAGE-ON$
 }
 
@@ -87,7 +87,7 @@ object PriorityMap extends PriorityMapFactory[PriorityMap] {
 
     implicit def ordering: Ordering[B] = underlying.ordering
 
-    override def empty = new WithDefault(underlying.empty, default)
+    override def empty: WithDefault[A, B] = new WithDefault(underlying.empty, default)
 
     def +(kv: (A, B)): WithDefault[A, B] = new WithDefault(underlying + kv, default)
 
@@ -105,13 +105,13 @@ object PriorityMap extends PriorityMapFactory[PriorityMap] {
 
     /* The following methods are only overridden for efficiency. */
 
-    override def last = underlying.last
+    override def last: (A, B) = underlying.last
 
-    override def valueSet = underlying.valueSet
+    override def valueSet: SortedSet[B] = underlying.valueSet
 
-    override def tail = new WithDefault(underlying.tail, default)
+    override def tail: WithDefault[A, B] = new WithDefault(underlying.tail, default)
 
-    override def init = new WithDefault(underlying.init, default)
+    override def init: WithDefault[A, B] = new WithDefault(underlying.init, default)
   }
 
 }

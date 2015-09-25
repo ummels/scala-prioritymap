@@ -29,9 +29,9 @@ abstract class PriorityMapFactory[CC[A, B] <: PriorityMap[A, B] with PriorityMap
 
   class PriorityMapCanBuildFrom[A, B](implicit ord: Ordering[B]) extends
   CanBuildFrom[Coll, (A, B), CC[A, B]] {
-    def apply(from: Coll) = newBuilder[A, B]
+    def apply(from: Coll): mutable.Builder[(A, B), CC[A, B]] = newBuilder[A, B]
 
-    def apply() = newBuilder[A, B]
+    def apply(): mutable.Builder[(A, B), CC[A, B]] = newBuilder[A, B]
   }
 
 }

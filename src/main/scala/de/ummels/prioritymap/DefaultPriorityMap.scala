@@ -5,8 +5,8 @@ import scala.collection.generic.CanBuildFrom
 import scala.collection.immutable._
 
 /** Default implementation of immutable priority maps using a pair of maps. */
-final class DefaultPriorityMap[A, B] private(map: Map[A, B], bags: SortedMap[B, Set[A]])
-                                            (implicit val ordering: Ordering[B])
+final class DefaultPriorityMap[A, B] private (map: Map[A, B], bags: SortedMap[B, Set[A]])
+                                             (implicit val ordering: Ordering[B])
   extends PriorityMap[A, B]
   with PriorityMapLike[A, B, DefaultPriorityMap[A, B]]
   with Serializable {
@@ -50,16 +50,16 @@ final class DefaultPriorityMap[A, B] private(map: Map[A, B], bags: SortedMap[B, 
     case Some(v) => delete(key, v)
   }
 
-  override def empty = DefaultPriorityMap.empty
+  override def empty: DefaultPriorityMap[A, B] = DefaultPriorityMap.empty
 
-  override def size = map.size
+  override def size: Int = map.size
 
-  override def last = {
+  override def last: (A, B) = {
     val key = bags.last._2.last
     (key, map(key))
   }
 
-  override def valueSet = bags.keySet
+  override def valueSet: SortedSet[B] = bags.keySet
 
   def rangeImpl(from: Option[B], until: Option[B]): DefaultPriorityMap[A, B] = {
     val bags1 = bags.rangeImpl(from, until)
@@ -67,12 +67,12 @@ final class DefaultPriorityMap[A, B] private(map: Map[A, B], bags: SortedMap[B, 
     new DefaultPriorityMap[A, B](map1, bags1)
   }
 
-  override def tail = headOption match {
+  override def tail: DefaultPriorityMap[A, B] = headOption match {
     case None => throw new UnsupportedOperationException("tail of empty map")
     case Some((k, v)) => delete(k, v)
   }
 
-  override def init = lastOption match {
+  override def init: DefaultPriorityMap[A, B] = lastOption match {
     case None => throw new UnsupportedOperationException("init of empty map")
     case Some((k, v)) => delete(k, v)
   }
