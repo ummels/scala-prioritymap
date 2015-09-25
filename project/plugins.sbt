@@ -1,5 +1,9 @@
 resolvers += "jgit-repo" at "http://download.eclipse.org/jgit/maven"
 
+resolvers += "sonatype-snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
+
+addSbtPlugin("org.scalastyle" %% "scalastyle-sbt-plugin" % "0.8.0-SNAPSHOT")
+
 addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "0.8.1")
 
 addSbtPlugin("com.typesafe.sbt" % "sbt-ghpages" % "0.5.4")
