@@ -4,8 +4,6 @@ resolvers += "sonatype-snapshots" at "https://oss.sonatype.org/content/repositor
 
 addSbtPlugin("org.scalastyle" %% "scalastyle-sbt-plugin" % "0.8.0-SNAPSHOT")
 
-addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "0.8.1")
-
 addSbtPlugin("com.typesafe.sbt" % "sbt-ghpages" % "0.5.4")
 
 addSbtPlugin("org.scoverage" % "sbt-scoverage" % "1.0.4")
