@@ -60,7 +60,7 @@ object PriorityMap extends PriorityMapFactory[PriorityMap] {
 
   import scala.language.implicitConversions
 
-  def empty[A, B](implicit ord: Ordering[B]): PriorityMap[A, B] = DefaultPriorityMap.empty[A, B]
+  def empty[A, B](implicit ord: Ordering[B]): PriorityMap[A, B] = StandardPriorityMap.empty[A, B]
 
   implicit def canBuildFrom[A, B](implicit ord: Ordering[B]): CanBuildFrom[Coll, (A, B), PriorityMap[A, B]] =
     new PriorityMapCanBuildFrom[A, B]

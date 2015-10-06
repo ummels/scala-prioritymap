@@ -14,7 +14,7 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
   property("apply should create a priority map with the given entries") {
     forAll(Gen.oneOf(ord1, ord2), Gen.listOf(genKeyValue)) { (ord, kvs) =>
       PriorityMap(kvs:_*)(ord) shouldEqual Map(kvs:_*)
-      DefaultPriorityMap(kvs:_*)(ord) shouldEqual Map(kvs:_*)
+      StandardPriorityMap(kvs:_*)(ord) shouldEqual Map(kvs:_*)
     }
   }
 
@@ -219,7 +219,7 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
     forAll(Gen.listOf(genKey)) { keys =>
       val m1: PriorityMap[Keys, Keys] = keys.map(k => k -> k)(breakOut)
       m1.keys.toSet shouldBe keys.toSet
-      val m2: DefaultPriorityMap[Keys, Keys] = keys.map(k => k -> k)(breakOut)
+      val m2: StandardPriorityMap[Keys, Keys] = keys.map(k => k -> k)(breakOut)
       m2.keys.toSet shouldBe keys.toSet
     }
   }

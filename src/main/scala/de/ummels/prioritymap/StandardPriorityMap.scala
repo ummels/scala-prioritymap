@@ -5,29 +5,29 @@ import scala.collection.generic.CanBuildFrom
 import scala.collection.immutable._
 
 /** Default implementation of immutable priority maps using a pair of maps. */
-final class DefaultPriorityMap[A, B] private (map: Map[A, B], bags: SortedMap[B, Set[A]])
+final class StandardPriorityMap[A, B] private (map: Map[A, B], bags: SortedMap[B, Set[A]])
                                              (implicit val ordering: Ordering[B])
   extends PriorityMap[A, B]
-  with PriorityMapLike[A, B, DefaultPriorityMap[A, B]]
+  with PriorityMapLike[A, B, StandardPriorityMap[A, B]]
   with Serializable {
 
   def this()(implicit ordering: Ordering[B]) =
     this(Map.empty[A, B], SortedMap.empty[B, Set[A]])
 
-  private def insert(key: A, value: B): DefaultPriorityMap[A, B] = {
+  private def insert(key: A, value: B): StandardPriorityMap[A, B] = {
     //require(!map.contains(key))
     val bags1 = bags + (value -> (bags.getOrElse(value, Set.empty) + key))
-    new DefaultPriorityMap(map.updated(key, value), bags1)
+    new StandardPriorityMap(map.updated(key, value), bags1)
   }
 
-  private def delete(key: A, value: B): DefaultPriorityMap[A, B] = {
+  private def delete(key: A, value: B): StandardPriorityMap[A, B] = {
     //require(map(key) == value)
     val bag = bags(value) - key
     val bags1 = if (bag.isEmpty) bags - value else bags updated(value, bag)
-    new DefaultPriorityMap(map - key, bags1)
+    new StandardPriorityMap(map - key, bags1)
   }
 
-  def +(kv: (A, B)): DefaultPriorityMap[A, B] = {
+  def +(kv: (A, B)): StandardPriorityMap[A, B] = {
     val (key, value) = kv
     get(key) match {
       case None => insert(key, value)
@@ -45,12 +45,12 @@ final class DefaultPriorityMap[A, B] private (map: Map[A, B], bags: SortedMap[B,
     a <- bag.iterator
   } yield (a, map(a))
 
-  def -(key: A): DefaultPriorityMap[A, B] = get(key) match {
+  def -(key: A): StandardPriorityMap[A, B] = get(key) match {
     case None => this
     case Some(v) => delete(key, v)
   }
 
-  override def empty: DefaultPriorityMap[A, B] = DefaultPriorityMap.empty
+  override def empty: StandardPriorityMap[A, B] = StandardPriorityMap.empty
 
   override def size: Int = map.size
 
@@ -61,18 +61,18 @@ final class DefaultPriorityMap[A, B] private (map: Map[A, B], bags: SortedMap[B,
 
   override def valueSet: SortedSet[B] = bags.keySet
 
-  def rangeImpl(from: Option[B], until: Option[B]): DefaultPriorityMap[A, B] = {
+  def rangeImpl(from: Option[B], until: Option[B]): StandardPriorityMap[A, B] = {
     val bags1 = bags.rangeImpl(from, until)
     val map1 = map.filterKeys(k => (map.get(k) map bags1.contains) getOrElse true)
-    new DefaultPriorityMap[A, B](map1, bags1)
+    new StandardPriorityMap[A, B](map1, bags1)
   }
 
-  override def tail: DefaultPriorityMap[A, B] = headOption match {
+  override def tail: StandardPriorityMap[A, B] = headOption match {
     case None => throw new UnsupportedOperationException("tail of empty map")
     case Some((k, v)) => delete(k, v)
   }
 
-  override def init: DefaultPriorityMap[A, B] = lastOption match {
+  override def init: StandardPriorityMap[A, B] = lastOption match {
     case None => throw new UnsupportedOperationException("init of empty map")
     case Some((k, v)) => delete(k, v)
   }
@@ -81,14 +81,14 @@ final class DefaultPriorityMap[A, B] private (map: Map[A, B], bags: SortedMap[B,
 }
 
 /** This object provides a set of operations needed to create priority maps. */
-object DefaultPriorityMap extends PriorityMapFactory[DefaultPriorityMap] {
+object StandardPriorityMap extends PriorityMapFactory[StandardPriorityMap] {
 
   import language.implicitConversions
 
-  def empty[A, B](implicit ord: Ordering[B]): DefaultPriorityMap[A, B] =
-    new DefaultPriorityMap[A, B]
+  def empty[A, B](implicit ord: Ordering[B]): StandardPriorityMap[A, B] =
+    new StandardPriorityMap[A, B]
 
   implicit def canBuildFrom[A, B](implicit ord: Ordering[B]):
-  CanBuildFrom[Coll, (A, B), DefaultPriorityMap[A, B]] =
+  CanBuildFrom[Coll, (A, B), StandardPriorityMap[A, B]] =
     new PriorityMapCanBuildFrom[A, B]
 }
