@@ -6,13 +6,10 @@ import org.scalatest.{Inspectors, Matchers, PropSpec, prop}
 
 import scala.collection.immutable.SortedSet
 
-/** Spec for immutable priority maps */
-class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
-
-  import PriorityMapSpec._
-
+/** Properties for immutable priority maps */
+trait Properties extends PropertySpec {
   property("apply should create a priority map with the given entries") {
-    forAll(Gen.oneOf(ord1, ord2), Gen.listOf(genKeyValue)) { (ord, kvs) =>
+    forAll(genOrd, Gen.listOf(genKeyValue)) { (ord, kvs) =>
       PriorityMap(kvs:_*)(ord) shouldEqual Map(kvs:_*)
       StandardPriorityMap(kvs:_*)(ord) shouldEqual Map(kvs:_*)
     }
@@ -209,12 +206,6 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
     }
   }
 
-  property("par should return an equivalent map") {
-    forAll(genPriorityMap) { m =>
-      m.par shouldEqual m
-    }
-  }
-
   property("breakOut should be able to yield a builder for priority maps") {
     forAll(Gen.listOf(genKey)) { keys =>
       val m1: PriorityMap[Keys, Keys] = keys.map(k => k -> k)(breakOut)
@@ -223,32 +214,4 @@ class PriorityMapSpec extends PropSpec with prop.PropertyChecks with Matchers {
       m2.keys.toSet shouldBe keys.toSet
     }
   }
-}
-
-object PriorityMapSpec {
-
-  type Keys = Int
-  type Values = (Int, Int)
-
-  val ord1 = Ordering.Tuple2(Ordering.Int, Ordering.Int)
-  val ord2 = Ordering.by[(Int, Int), Int](x => x._1)
-
-  def genKey: Gen[Keys] = Gen.choose(-10, 10)
-
-  def genValue: Gen[Values] = Gen.zip(genKey, genKey)
-
-  def genKeyValue: Gen[(Keys, Values)] = Gen.zip(genKey, genValue)
-
-  def genPriorityMap: Gen[PriorityMap[Keys, Values]] = for {
-    ord <- Gen.oneOf(ord1, ord2)
-    kvs <- Gen.listOf(genKeyValue)
-    m = PriorityMap.empty(ord) ++ kvs
-    default <- Arbitrary.arbitrary[Option[Values]]
-    pred <- Arbitrary.arbitrary[Option[Keys => Boolean]]
-  } yield (default, pred) match {
-      case (None, None) => m
-      case (Some(d), None) => m withDefaultValue d
-      case (None, Some(p)) => m filterKeys p
-      case (Some(d), Some(p)) => (m withDefaultValue d) filterKeys p
-    }
 }

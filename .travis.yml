@@ -6,7 +6,7 @@ scala:
 jdk:
 - openjdk7
 - oraclejdk8
-script: sbt coverage test
+script: sbt ++$TRAVIS_SCALA_VERSION validate
 after_success:
 - |
   [[ $TRAVIS_PULL_REQUEST = false ]] &&
@@ -18,7 +18,7 @@ after_success:
   [[ $TRAVIS_BRANCH = master ]] &&
   [[ $TRAVIS_JDK_VERSION = openjdk7 ]] &&
   [[ $TRAVIS_SCALA_VERSION = 2.11.* ]] &&
-  sbt coveralls
+  false && sbt coveralls
 - |
   [[ $TRAVIS_PULL_REQUEST = false ]] &&
   [[ $TRAVIS_BRANCH = master ]] &&
