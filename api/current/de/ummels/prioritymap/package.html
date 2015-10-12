@@ -66,24 +66,7 @@
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="de.ummels.prioritymap.DefaultPriorityMap" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="DefaultPriorityMap[A,B]extendsPriorityMap[A,B]withPriorityMapLike[A,B,de.ummels.prioritymap.DefaultPriorityMap[A,B]]withSerializable"></a>
-      <a id="DefaultPriorityMap[A,B]:DefaultPriorityMap[A,B]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="DefaultPriorityMap.html"><span class="name">DefaultPriorityMap</span></a><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="result"> extends <a href="PriorityMap.html" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.B">B</span>] with <a href="PriorityMapLike.html" class="extype" name="de.ummels.prioritymap.PriorityMapLike">PriorityMapLike</a>[<span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.B">B</span>, <a href="DefaultPriorityMap.html" class="extype" name="de.ummels.prioritymap.DefaultPriorityMap">DefaultPriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.DefaultPriorityMap.B">B</span>]] with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#de.ummels.prioritymap.package@DefaultPriorityMap[A,B]extendsPriorityMap[A,B]withPriorityMapLike[A,B,de.ummels.prioritymap.DefaultPriorityMap[A,B]]withSerializable" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">Default implementation of immutable priority maps using a pair of maps.</p>
-    </li><li name="de.ummels.prioritymap.PriorityMap" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
+              <ol><li name="de.ummels.prioritymap.PriorityMap" visbl="pub" data-isabs="true" fullComment="yes" group="Ungrouped">
       <a id="PriorityMap[A,B]extendsMap[A,B]withPriorityMapLike[A,B,de.ummels.prioritymap.PriorityMap[A,B]]"></a>
       <a id="PriorityMap[A,B]:PriorityMap[A,B]"></a>
       <h4 class="signature">
@@ -167,6 +150,23 @@ in addition to those of <code>MapLike</code>:</p><pre><span class="kw">implicit<
 <span class="kw">def</span> rangeImpl(from: <span class="std">Option</span>[B], until: <span class="std">Option</span>[B]): This</pre><p>The iterator returned by <code>iterator</code> should generate key/value pairs in the
 order specified by the implicit ordering on values.</p><p>Concrete classes may also override other methods for efficiency.
 </p></div></div>
+    </li><li name="de.ummels.prioritymap.StandardPriorityMap" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="StandardPriorityMap[A,B]extendsPriorityMap[A,B]withPriorityMapLike[A,B,de.ummels.prioritymap.StandardPriorityMap[A,B]]withSerializable"></a>
+      <a id="StandardPriorityMap[A,B]:StandardPriorityMap[A,B]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="StandardPriorityMap.html"><span class="name">StandardPriorityMap</span></a><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="result"> extends <a href="PriorityMap.html" class="extype" name="de.ummels.prioritymap.PriorityMap">PriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.StandardPriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.StandardPriorityMap.B">B</span>] with <a href="PriorityMapLike.html" class="extype" name="de.ummels.prioritymap.PriorityMapLike">PriorityMapLike</a>[<span class="extype" name="de.ummels.prioritymap.StandardPriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.StandardPriorityMap.B">B</span>, <a href="StandardPriorityMap.html" class="extype" name="de.ummels.prioritymap.StandardPriorityMap">StandardPriorityMap</a>[<span class="extype" name="de.ummels.prioritymap.StandardPriorityMap.A">A</span>, <span class="extype" name="de.ummels.prioritymap.StandardPriorityMap.B">B</span>]] with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#de.ummels.prioritymap.package@StandardPriorityMap[A,B]extendsPriorityMap[A,B]withPriorityMapLike[A,B,de.ummels.prioritymap.StandardPriorityMap[A,B]]withSerializable" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Default implementation of immutable priority maps using a pair of maps.</p>
     </li></ol>
             </div>
 
@@ -174,24 +174,7 @@ order specified by the implicit ordering on values.</p><p>Concrete classes may a
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="de.ummels.prioritymap.DefaultPriorityMap" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="DefaultPriorityMap"></a>
-      <a id="DefaultPriorityMap:DefaultPriorityMap"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="DefaultPriorityMap$.html"><span class="name">DefaultPriorityMap</span></a><span class="result"> extends <a href="PriorityMapFactory.html" class="extype" name="de.ummels.prioritymap.PriorityMapFactory">PriorityMapFactory</a>[<a href="DefaultPriorityMap.html" class="extype" name="de.ummels.prioritymap.DefaultPriorityMap">DefaultPriorityMap</a>] with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../index.html#de.ummels.prioritymap.package@DefaultPriorityMap" title="Permalink" target="_top">
-        <img src="../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <p class="shortcomment cmt">This object provides a set of operations needed to create priority maps.</p>
-    </li><li name="de.ummels.prioritymap.PriorityMap" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+              <ol><li name="de.ummels.prioritymap.PriorityMap" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="PriorityMap"></a>
       <a id="PriorityMap:PriorityMap"></a>
       <h4 class="signature">
@@ -204,6 +187,23 @@ order specified by the implicit ordering on values.</p><p>Concrete classes may a
       </span>
       </h4><span class="permalink">
       <a href="../../../index.html#de.ummels.prioritymap.package@PriorityMap" title="Permalink" target="_top">
+        <img src="../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">This object provides a set of operations needed to create priority maps.</p>
+    </li><li name="de.ummels.prioritymap.StandardPriorityMap" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="StandardPriorityMap"></a>
+      <a id="StandardPriorityMap:StandardPriorityMap"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="StandardPriorityMap$.html"><span class="name">StandardPriorityMap</span></a><span class="result"> extends <a href="PriorityMapFactory.html" class="extype" name="de.ummels.prioritymap.PriorityMapFactory">PriorityMapFactory</a>[<a href="StandardPriorityMap.html" class="extype" name="de.ummels.prioritymap.StandardPriorityMap">StandardPriorityMap</a>] with <a href="http://www.scala-lang.org/api/2.11.7/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../index.html#de.ummels.prioritymap.package@StandardPriorityMap" title="Permalink" target="_top">
         <img src="../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
