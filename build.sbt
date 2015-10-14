@@ -3,15 +3,12 @@ import scoverage.ScoverageSbtPlugin
 val publishSnapshot = taskKey[Unit]("Publishes snapshot artifacts to a repository.")
 
 lazy val buildSettings = Seq(
-  name := "scala-prioritymap",
   version := "0.4.0-SNAPSHOT",
   organization := "de.ummels",
   description := "Immutable priority maps for Scala",
   scalaVersion := "2.11.7",
   crossScalaVersions := Seq("2.10.5", "2.11.7"),
-  scalacOptions ++= Seq("-Xlint", "-unchecked", "-deprecation", "-feature"),
-  libraryDependencies += "org.scalatest" %%% "scalatest" % "3.0.0-M9" % "test",
-  libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.12.5" % "test"
+  scalacOptions ++= Seq("-Xlint", "-unchecked", "-deprecation", "-feature")
 )
 
 lazy val docSettings = Seq(
@@ -30,7 +27,8 @@ lazy val docSettings = Seq(
       Seq("-doc-source-url", prefix + "master" + path)
     else
       Seq("-doc-source-url", prefix + "v" + version.value + path)
-  }
+  },
+  autoAPIMappings := true
 )
 
 lazy val publishSettings = Seq(
@@ -53,10 +51,13 @@ lazy val publishSettings = Seq(
   licenses := Seq("ISC License" -> url("http://opensource.org/licenses/ISC")),
   scmInfo := Some(ScmInfo(url("https://github.com/ummels/scala-prioritymap"),
     "scm:git:git@github.com:ummels/scala-prioritymap.git")),
-  autoAPIMappings := true,
   apiURL := {
-    if (isSnapshot.value) None
-    else Some(url("https://ummels.github.io/scala-prioritymap/api/" + version.value))
+    val baseUrl = "https://oss.sonatype.org/service/local/repositories/releases/archive/de/ummels/"
+    val artifact = normalizedName.value + "_" + scalaBinaryVersion.value
+    val dir =  artifact + "/" + version.value + "/"
+    val jar = artifact + "-" + version.value + "-javadoc.jar"
+    if (isSnapshot.value) Some(url("https://ummels.github.io/scala-prioritymap/api/"))
+    else Some(url(baseUrl + dir + jar + "/!/"))
   },
   pomExtra := {
     <developers>
@@ -88,9 +89,10 @@ lazy val siteSettings = site.settings ++ ghpages.settings ++ Seq(
       case Some(token) => "https://" + token + "@github.com/" + repo
     }
   }
-) ++ site.includeScaladoc("api/current")
+) ++ site.includeScaladoc("api")
 
 lazy val commonSettings = Seq(
+  parallelExecution in Test := false,
   coverageHighlighting := scalaBinaryVersion.value != "2.10"
 )
 
@@ -99,27 +101,49 @@ lazy val commonJsSettings = Seq(
   parallelExecution := false
 )
 
-lazy val commonJvmSettings = Seq()
+lazy val commonJvmSettings = Seq(
+  testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-oDF")
+)
 
 lazy val root = project.in(file(".")).
-    aggregate(libraryJVM, libraryJS).
     settings(name := "scala-prioritymap-root").
-    settings(noPublishSettings: _*)
+    settings(buildSettings:_*).
+    settings(noPublishSettings:_*).
+    aggregate(libraryJVM, libraryJS, testsJVM, testsJS)
 
-lazy val library = crossProject.in(file(".")).
-    settings(buildSettings: _*).
-    settings(docSettings: _*).
-    settings(publishSettings: _*).
-    settings(commonSettings: _*).
-    jvmSettings(commonJvmSettings: _*).
-    jvmSettings(siteSettings: _*).
-    jsSettings(commonJsSettings: _*).
+lazy val library = crossProject.crossType(CrossType.Pure).in(file("library")).
+    settings(name := "scala-prioritymap").
+    settings(buildSettings:_*).
+    settings(docSettings:_*).
+    settings(publishSettings:_*).
+    settings(commonSettings:_*).
+    jvmSettings(commonJvmSettings:_*).
+    jvmSettings(siteSettings:_*).
+    jsSettings(commonJsSettings:_*).
     jsConfigure(_.disablePlugins(ScoverageSbtPlugin))
 
 lazy val libraryJVM = library.jvm
 
 lazy val libraryJS = library.js
 
-addCommandAlias("validateJVM", ";coverage;libraryJVM/test")
-addCommandAlias("validateJS", ";libraryJS/test")
+lazy val tests = crossProject.in(file("tests")).
+    dependsOn(library).
+    settings(name := "scala-prioritymap-tests").
+    settings(buildSettings:_*).
+    settings(noPublishSettings:_*).
+    settings(commonSettings:_*).
+    settings(
+      libraryDependencies += "org.scalatest" %%% "scalatest" % "3.0.0-M9" % "test",
+      libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.12.5" % "test"
+    ).
+    jvmSettings(commonJvmSettings:_*).
+    jsSettings(commonJsSettings:_*).
+    jsConfigure(_.disablePlugins(ScoverageSbtPlugin))
+
+lazy val testsJVM = tests.jvm
+
+lazy val testsJS = tests.js
+
+addCommandAlias("validateJVM", ";coverage;testsJVM/test;coverageReport")
+addCommandAlias("validateJS", ";testsJS/test")
 addCommandAlias("validate", ";validateJVM;validateJS")
