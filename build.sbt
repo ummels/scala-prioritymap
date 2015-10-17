@@ -133,7 +133,7 @@ lazy val tests = crossProject.in(file("tests")).
     settings(noPublishSettings:_*).
     settings(commonSettings:_*).
     settings(
-      libraryDependencies += "org.scalatest" %%% "scalatest" % "3.0.0-M9" % "test",
+      libraryDependencies += "org.scalatest" %%% "scalatest" % "3.0.0-M10" % "test",
       libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.12.5" % "test"
     ).
     jvmSettings(commonJvmSettings:_*).
