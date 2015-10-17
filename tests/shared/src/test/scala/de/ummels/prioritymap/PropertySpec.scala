@@ -5,7 +5,7 @@ import org.scalatest.{PropSpecLike, prop, Matchers}
 
 trait PropertySpec extends PropSpecLike with prop.PropertyChecks with Matchers with prop.Configuration {
   override implicit val generatorDrivenConfig: PropertyCheckConfiguration =
-    PropertyCheckConfiguration(minSuccessful = 100, maxDiscardedFactor = 5.0)
+    PropertyCheckConfiguration(minSuccessful = 100)
 
   private val ord1 = Ordering.Tuple2(Ordering.Int, Ordering.Int)
   private val ord2 = Ordering.by[(Int, Int), Int](x => x._1)
