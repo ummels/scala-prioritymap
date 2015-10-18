@@ -1,5 +1,10 @@
 # Release Notes
 
+#### Version 0.5.0 (18 Oct 2015)
+
+- Add Scala.js support.
+- Rename `DefaultPriorityMap` to `StandardPriorityMap`.
+
 #### Version 0.3.0 (24 Jan 2015)
 
 - Fixed behavior of default implementation for custom orderings.
