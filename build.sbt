@@ -1,5 +1,3 @@
-import scoverage.ScoverageSbtPlugin
-
 val publishSnapshot = taskKey[Unit]("Publishes snapshot artifacts to a repository.")
 
 lazy val buildSettings = Seq(
@@ -78,7 +76,7 @@ lazy val publishSettings = Seq(
 lazy val noPublishSettings = Seq(
   publish := (),
   publishLocal := (),
-  publishSigned := (),
+  PgpKeys.publishSigned := (),
   publishArtifact := false
 )
 
@@ -121,7 +119,7 @@ lazy val library = crossProject.crossType(CrossType.Pure).in(file("library")).
     jvmSettings(commonJvmSettings:_*).
     jvmSettings(siteSettings:_*).
     jsSettings(commonJsSettings:_*).
-    jsConfigure(_.disablePlugins(ScoverageSbtPlugin))
+    jsConfigure(_.disablePlugins(scoverage.ScoverageSbtPlugin))
 
 lazy val libraryJVM = library.jvm
 
@@ -139,7 +137,7 @@ lazy val tests = crossProject.in(file("tests")).
     ).
     jvmSettings(commonJvmSettings:_*).
     jsSettings(commonJsSettings:_*).
-    jsConfigure(_.disablePlugins(ScoverageSbtPlugin))
+    jsConfigure(_.disablePlugins(scoverage.ScoverageSbtPlugin))
 
 lazy val testsJVM = tests.jvm
 
