@@ -66,6 +66,7 @@ lazy val publishSettings = Seq(
       </developer>
     </developers>
   },
+  pgpSecretRing := file(Path.userHome.absolutePath + "/.sbt/gpg/secring.gpg"),
   publishSnapshot := Def.taskDyn {
     if (isSnapshot.value) Def.task { publish.value }
     else Def.task {
@@ -77,6 +78,7 @@ lazy val publishSettings = Seq(
 lazy val noPublishSettings = Seq(
   publish := (),
   publishLocal := (),
+  publishSigned := (),
   publishArtifact := false
 )
 
