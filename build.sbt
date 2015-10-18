@@ -3,7 +3,6 @@ import scoverage.ScoverageSbtPlugin
 val publishSnapshot = taskKey[Unit]("Publishes snapshot artifacts to a repository.")
 
 lazy val buildSettings = Seq(
-  version := "0.4.0-SNAPSHOT",
   organization := "de.ummels",
   description := "Immutable priority maps for Scala",
   scalaVersion := "2.11.7",
