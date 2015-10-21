@@ -17,7 +17,7 @@ This implementation of priority maps has been inspired by
 
 ## Setup
 
-The latest version is 0.5.0 and supports Scala 2.10 and 2.11 on the JVM as well as
+The latest version is 0.5.0 and supports Scala 2.10 and 2.11 on the JVM as well as on
 [Scala.js](http://www.scala-js.org).
 
 Releases are available from [Maven Central](https://search.maven.org/#search|ga|1|scala-prioritymap).
@@ -32,7 +32,7 @@ See the [release notes](RELEASE.md) if you upgrade from an earlier release.
 ## Usage
 
 The easiest way to instantiate a new priority map is to use the `apply` method in the
-PriorityMap companion object.
+`PriorityMap` companion object.
 
 ```scala
 scala> import de.ummels.prioritymap.PriorityMap
