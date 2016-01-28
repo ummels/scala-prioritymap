@@ -13,7 +13,7 @@ lazy val docSettings = Seq(
       Seq("-doc-root-content", baseDirectory.value + "/root-doc.txt"),
   scalacOptions in(Compile, doc) ++= Seq("-doc-title", name.value),
   scalacOptions in(Compile, doc) ++= {
-    val copy = "© 2014-2015 Michael Ummels"
+    val copy = "© 2014-2016 Michael Ummels"
     val footer = name.value + " " + version.value + " API documentation. " + copy
     Seq("-doc-footer", footer)
   },
