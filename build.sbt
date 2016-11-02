@@ -93,7 +93,7 @@ lazy val siteSettings = site.settings ++ ghpages.settings ++ Seq(
 lazy val commonSettings = Seq(
   parallelExecution in Test := false,
   coverageHighlighting := scalaBinaryVersion.value == "2.11",
-  scalastyleSources in Compile ++= (sourceDirectories in Compile).value // See https://github.com/scalastyle/scalastyle-sbt-plugin/issues/47
+  scalastyleSources in Compile := (unmanagedSourceDirectories in Compile).value // See https://github.com/scalastyle/scalastyle-sbt-plugin/issues/47
 )
 
 lazy val commonJsSettings = Seq(
