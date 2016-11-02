@@ -116,8 +116,7 @@ trait Properties extends PropertySpec {
   property("filterKeys should behave like filter") {
     forAll(for {
       m <- genPriorityMap
-      s <- Gen.choose(0, m.size)
-      p <- Gen.containerOfN[Set, Keys](s, Gen.oneOf(m.keys.toSeq))
+      p <- Gen.containerOf[Set, Keys](genKey)
     } yield (m, p)) { case (m, p) =>
       m.filterKeys(p) shouldBe m.filter { case (k, _) => p(k) }
     }

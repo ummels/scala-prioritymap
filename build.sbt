@@ -3,8 +3,8 @@ val publishSnapshot = taskKey[Unit]("Publishes snapshot artifacts to a repositor
 lazy val buildSettings = Seq(
   organization := "de.ummels",
   description := "Immutable priority maps for Scala",
-  scalaVersion := "2.11.7",
-  crossScalaVersions := Seq("2.10.5", "2.11.7"),
+  scalaVersion := "2.11.8",
+  crossScalaVersions := Seq("2.10.6", "2.11.8"),
   scalacOptions ++= Seq("-Xlint", "-unchecked", "-deprecation", "-feature")
 )
 
@@ -92,7 +92,7 @@ lazy val siteSettings = site.settings ++ ghpages.settings ++ Seq(
 
 lazy val commonSettings = Seq(
   parallelExecution in Test := false,
-  coverageHighlighting := scalaBinaryVersion.value != "2.10"
+  coverageHighlighting := scalaBinaryVersion.value == "2.11"
 )
 
 lazy val commonJsSettings = Seq(
@@ -132,8 +132,8 @@ lazy val tests = crossProject.in(file("tests")).
     settings(noPublishSettings:_*).
     settings(commonSettings:_*).
     settings(
-      libraryDependencies += "org.scalatest" %%% "scalatest" % "3.0.0-M15" % "test",
-      libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.12.5" % "test"
+      libraryDependencies += "org.scalatest" %%% "scalatest" % "3.0.0" % "test",
+      libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.13.4" % "test"
     ).
     jvmSettings(commonJvmSettings:_*).
     jsSettings(commonJsSettings:_*).
