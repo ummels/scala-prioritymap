@@ -144,6 +144,6 @@ lazy val testsJVM = tests.jvm
 
 lazy val testsJS = tests.js
 
-addCommandAlias("validateJVM", ";coverage;testsJVM/test;coverageReport")
-addCommandAlias("validateJS", ";testsJS/test")
+addCommandAlias("validateJVM", ";libraryJVM/scalastyle;coverage;testsJVM/test;coverageReport")
+addCommandAlias("validateJS", ";libraryJS/scalastyle;testsJS/test")
 addCommandAlias("validate", ";validateJVM;validateJS")
