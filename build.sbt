@@ -3,8 +3,8 @@ val publishSnapshot = taskKey[Unit]("Publishes snapshot artifacts to a repositor
 lazy val buildSettings = Seq(
   organization := "de.ummels",
   description := "Immutable priority maps for Scala",
-  scalaVersion := "2.11.8",
-  crossScalaVersions := Seq("2.10.6", "2.11.8"),
+  scalaVersion := "2.12.0",
+  crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.0"),
   scalacOptions ++= Seq("-Xlint", "-unchecked", "-deprecation", "-feature")
 )
 
@@ -92,7 +92,7 @@ lazy val siteSettings = site.settings ++ ghpages.settings ++ Seq(
 
 lazy val commonSettings = Seq(
   parallelExecution in Test := false,
-  coverageHighlighting := scalaBinaryVersion.value == "2.11",
+  coverageHighlighting := scalaBinaryVersion.value == "2.12",
   scalastyleSources in Compile := (unmanagedSourceDirectories in Compile).value // See https://github.com/scalastyle/scalastyle-sbt-plugin/issues/47
 )
 
