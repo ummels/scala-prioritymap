@@ -22,7 +22,6 @@ after_success:
 - |
   [[ $TRAVIS_PULL_REQUEST = false ]] &&
   [[ $TRAVIS_BRANCH = master ]] &&
-  [[ $TRAVIS_JDK_VERSION = openjdk7 ]] &&
   [[ $TRAVIS_SCALA_VERSION = 2.12.* ]] &&
   git config --global user.email "travis@travis-ci.org" &&
   git config --global user.name "Travis CI" &&
