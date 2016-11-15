@@ -2,8 +2,8 @@
 
 [![Build Status](https://img.shields.io/travis/ummels/scala-prioritymap/master.svg)](https://travis-ci.org/ummels/scala-prioritymap)
 [![Coverage](https://img.shields.io/codecov/c/github/ummels/scala-prioritymap/master.svg)](https://codecov.io/github/ummels/scala-prioritymap?branch=master)
-[![Maven Central](https://img.shields.io/maven-central/v/de.ummels/scala-prioritymap_2.11.svg)](https://search.maven.org/#search|ga|1|scala-prioritymap)
-[![Scala.js](https://www.scala-js.org/assets/badges/scalajs-0.6.5.svg)](https://www.scala-js.org)
+[![Maven Central](https://img.shields.io/maven-central/v/de.ummels/scala-prioritymap_2.12.svg)](https://search.maven.org/#search|ga|1|scala-prioritymap)
+[![Scala.js](https://www.scala-js.org/assets/badges/scalajs-0.6.13.svg)](https://www.scala-js.org)
 
 Priority maps are similar to sorted maps, but while for sorted maps `iterator` returns an iterator that
 produces entries sorted by their keys, calling `iterator` on a priority map returns an iterator that
@@ -18,14 +18,14 @@ This implementation of priority maps has been inspired by
 
 ## Setup
 
-The latest version is 0.5.0 and supports Scala 2.10 and 2.11 on the JVM as well as on
+The latest version is 1.0.0 and supports Scala 2.10&ndash;2.12 on the JVM as well as on
 [Scala.js](http://www.scala-js.org).
 
 Releases are available from [Maven Central](https://search.maven.org/#search|ga|1|scala-prioritymap).
 If you use [sbt](http://www.scala-sbt.org/), simply add the following dependency to your build file:
 
 ```scala
-libraryDependencies += "de.ummels" %%% "scala-prioritymap" % "0.5.0"
+libraryDependencies += "de.ummels" %%% "scala-prioritymap" % "1.0.0"
 ```
 
 See the [release notes](RELEASE.md) if you upgrade from an earlier release.

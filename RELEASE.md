@@ -1,5 +1,9 @@
 # Release Notes
 
+#### Version 1.0.0 (15 Nov 2016)
+
+- Add support for Scala 2.12
+
 #### Version 0.5.0 (18 Oct 2015)
 
 - Add Scala.js support.
