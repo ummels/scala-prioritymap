@@ -3,8 +3,8 @@ val publishSnapshot = taskKey[Unit]("Publishes snapshot artifacts to a repositor
 lazy val buildSettings = Seq(
   organization := "de.ummels",
   description := "Immutable priority maps for Scala",
-  scalaVersion := "2.12.0",
-  crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.0"),
+  scalaVersion := "2.12.1",
+  crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.1"),
   scalacOptions ++= Seq("-Xlint", "-unchecked", "-deprecation", "-feature")
 )
 
@@ -133,7 +133,7 @@ lazy val tests = crossProject.in(file("tests")).
     settings(noPublishSettings:_*).
     settings(commonSettings:_*).
     settings(
-      libraryDependencies += "org.scalatest" %%% "scalatest" % "3.0.0" % "test",
+      libraryDependencies += "org.scalatest" %%% "scalatest" % "3.0.1" % "test",
       libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.13.4" % "test"
     ).
     jvmSettings(commonJvmSettings:_*).
