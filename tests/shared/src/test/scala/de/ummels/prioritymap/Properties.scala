@@ -90,7 +90,7 @@ trait Properties extends PropertySpec {
       keys <- Gen.listOfN(m.size, genKey)
       vals <- Gen.listOfN(m.size, genValue)
     } yield (m, keys, vals)) { case (m, keys, vals) =>
-      val f: (Values, Values) => Values = (v1, v2) => (v1._1 + v2._1, v1._2 min v2._2)
+      val f: (Value, Value) => Value = (v1, v2) => (v1._1 + v2._1, v1._2 min v2._2)
       val kvs = keys zip vals
       val m1 = (m merged kvs)(f)
       val all = m.toSeq ++ kvs
@@ -114,20 +114,13 @@ trait Properties extends PropertySpec {
   }
 
   property("filterKeys should behave like filter") {
-    forAll(for {
-      m <- genPriorityMap
-      p <- Gen.containerOf[Set, Keys](genKey)
-    } yield (m, p)) { case (m, p) =>
+    forAll(genPriorityMap, Arbitrary.arbitrary[Key => Boolean]) { (m, p) =>
       m.filterKeys(p) shouldBe m.filter { case (k, _) => p(k) }
     }
   }
 
   property("mapValues should behave like map") {
-    forAll(for {
-      m <- genPriorityMap
-      vals <- Gen.listOfN(m.size, Arbitrary.arbitrary[Int])
-      f = Map.empty[Values, Int] ++ (m.values zip vals)
-    } yield (m, f)) { case (m, f) =>
+    forAll(genPriorityMap, Arbitrary.arbitrary[Value => Int]) { (m, f) =>
       m.mapValues(f) shouldBe m.map { case (k, v) => (k, f(v)) }
     }
   }
@@ -185,8 +178,7 @@ trait Properties extends PropertySpec {
   }
 
   property("withDefault should use the default function for keys not in the map") {
-    forAll(genPriorityMap, genKey, genValue) { (m, key, value) =>
-      val d = (_: Keys) => value
+    forAll(genPriorityMap, genKey, Arbitrary.arbitrary[Key => Value]) { (m, key, d) =>
       val m1 = m.withDefault(d)
       m1(key) shouldBe m.getOrElse(key, d(key))
       (m1 - key)(key) shouldBe d(key)
@@ -207,9 +199,9 @@ trait Properties extends PropertySpec {
 
   property("breakOut should be able to yield a builder for priority maps") {
     forAll(Gen.listOf(genKey)) { keys =>
-      val m1: PriorityMap[Keys, Keys] = keys.map(k => k -> k)(breakOut)
+      val m1: PriorityMap[Key, Key] = keys.map(k => k -> k)(breakOut)
       m1.keys.toSet shouldBe keys.toSet
-      val m2: StandardPriorityMap[Keys, Keys] = keys.map(k => k -> k)(breakOut)
+      val m2: StandardPriorityMap[Key, Key] = keys.map(k => k -> k)(breakOut)
       m2.keys.toSet shouldBe keys.toSet
     }
   }

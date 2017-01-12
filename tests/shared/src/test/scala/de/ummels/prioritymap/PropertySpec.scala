@@ -10,23 +10,23 @@ trait PropertySpec extends PropSpecLike with prop.PropertyChecks with Matchers w
   private val ord1 = Ordering.Tuple2(Ordering.Int, Ordering.Int)
   private val ord2 = Ordering.by[(Int, Int), Int](x => x._1)
 
-  type Keys = Int
-  type Values = (Int, Int)
+  type Key = Int
+  type Value = (Int, Int)
 
-  def genOrd: Gen[Ordering[Values]] = Gen.oneOf(ord1, ord2)
+  def genOrd: Gen[Ordering[Value]] = Gen.oneOf(ord1, ord2)
 
-  def genKey: Gen[Keys] = Gen.choose(-10, 10)
+  def genKey: Gen[Key] = Gen.choose(-10, 10)
 
-  def genValue: Gen[Values] = Gen.zip(genKey, genKey)
+  def genValue: Gen[Value] = Gen.zip(genKey, genKey)
 
-  def genKeyValue: Gen[(Keys, Values)] = Gen.zip(genKey, genValue)
+  def genKeyValue: Gen[(Key, Value)] = Gen.zip(genKey, genValue)
 
-  def genPriorityMap: Gen[PriorityMap[Keys, Values]] = for {
+  def genPriorityMap: Gen[PriorityMap[Key, Value]] = for {
     ord <- genOrd
     kvs <- Gen.listOf(genKeyValue)
     m = PriorityMap.empty(ord) ++ kvs
-    default <- Arbitrary.arbitrary[Option[Values]]
-    pred <- Arbitrary.arbitrary[Option[Keys => Boolean]]
+    default <- Arbitrary.arbitrary[Option[Value]]
+    pred <- Arbitrary.arbitrary[Option[Key => Boolean]]
   } yield (default, pred) match {
       case (None, None) => m
       case (Some(d), None) => m withDefaultValue d
