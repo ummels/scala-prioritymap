@@ -89,8 +89,8 @@ trait Properties extends PropertySpec {
       m <- genPriorityMap
       keys <- Gen.listOfN(m.size, genKey)
       vals <- Gen.listOfN(m.size, genValue)
-    } yield (m, keys, vals)) { case (m, keys, vals) =>
-      val f: (Value, Value) => Value = (v1, v2) => (v1._1 + v2._1, v1._2 min v2._2)
+      f <- Arbitrary.arbitrary[(Value, Value) => Value]
+    } yield (m, keys, vals, f)) { case (m, keys, vals, f) =>
       val kvs = keys zip vals
       val m1 = (m merged kvs)(f)
       val all = m.toSeq ++ kvs
